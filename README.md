@@ -1,3 +1,3 @@
 server-sleep
 ============
-Not ready yet!
+Project is not ready yet!
