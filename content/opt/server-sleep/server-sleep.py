@@ -277,6 +277,7 @@ class serverSleep(object):
 			
 
 # Startup
-instance = serverSleep()
-instance.log("server-sleep started")
-instance.func_doCheck()
+if __name__ == '__main__':
+	instance = serverSleep()
+	instance.log("server-sleep started")
+	instance.func_doCheck()

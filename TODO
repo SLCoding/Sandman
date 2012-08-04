@@ -7,4 +7,6 @@
 
 - func_critprocess auf leere strings prüfen
 
-.installations script schreiben
+- installations script schreiben
+
+- Zeitraum in dem nicht gecheckt werden soll...
