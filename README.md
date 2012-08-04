@@ -21,7 +21,7 @@ Requirements
 ------------
 The installation script will check for requirements. We recomment to install all to get the full range of features
 -	python	(Hey, its written in python… surely you need it!)
--	
+-	...
 
 Using the install script
 ------------------------
