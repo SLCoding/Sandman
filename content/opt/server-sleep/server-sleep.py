@@ -282,5 +282,6 @@ if __name__ == '__main__':
 	instance = serverSleep()
 	instance.log("server-sleep started")
 	instance.func_doCheck()	instance.log("server-sleep started", 3, True)
+	instance.log("server-sleep started", 3, True)
 	instance.func_doCheck()
 	instance.log("server-sleep terminated", 3, True)
