@@ -20,7 +20,7 @@ Its tested on Ubuntu 12.04 and Debian Wheezy.
 Requirements
 ------------
 The installation script will check for requirements. We recomment to install all to get the full range of features
--	python	(Hey, its written in python… surely you need it!)
+-	python	(Hey, its written in python… you need it!)
 -	...
 
 Using the install script
@@ -28,7 +28,7 @@ Using the install script
 -	Download the last stable version or make a clone of this repo
 -	run the install.sh as root
 -	now configure it by editing / or running "server-sleep -s"
--	reboot or run 
+-	reboot or run "sudo /etc/init.d/server-sleep start"
 
 Hand made installation
 ----------------------
