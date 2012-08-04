@@ -231,6 +231,7 @@ class serverSleep(object):
 	
 	def func_sleep (self):
 		pass
+		print "test"
 		#os.system(self.general_sleepcmd);
 	
 	def func_doCheck (self):
@@ -280,4 +281,6 @@ class serverSleep(object):
 if __name__ == '__main__':
 	instance = serverSleep()
 	instance.log("server-sleep started")
+	instance.func_doCheck()	instance.log("server-sleep started", 3, True)
 	instance.func_doCheck()
+	instance.log("server-sleep terminated", 3, True)
