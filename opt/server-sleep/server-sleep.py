@@ -50,8 +50,8 @@ class serverSleep(object):
 	def __del__(self):
 		pass
 	
-	def log (self, message, type_ = 3):
-		if type_ <= self.general_debug:
+	def log (self, message, type_ = 3, importand = False):
+		if (type_ <= self.general_debug) or (self.general_debug!= 0 and importand == True):
 			type_str = None;
 			if type_ == 1:
 				type_str =  " ERROR: "
@@ -271,8 +271,9 @@ class serverSleep(object):
 			else:
 				self.log("Skip Checking for network machines")
 			
-			self.log("All Checks OK: Going to Sleep Now!")
+			self.log("All Checks OK: Going to Sleep Now!", 3, True)
 			self.func_sleep()
+			self.log("Sleep is over: Server woke up!", 3, True)
 			
 
 # Startup
