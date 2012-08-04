@@ -1,0 +1,10 @@
+-wenn pyload offline ist-> pyLoadCli status: "could not establish connection to 127.0.0.1"
+
+-konfigurierbare Anzahl an Checks die alle hintereinander true sein müssen
+ zur Verhinderung vom runterfahren im ungünstigen moment (in dem moment wo gerade der check läuft, startet einer der hosts neu)
+
+
+
+- func_critprocess auf leere strings prüfen
+
+.installations script schreiben

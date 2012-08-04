@@ -14,8 +14,10 @@
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-	@author: Daniel Wiesendorf
-	@author: Marcus Schütte
+	Get more info at: https://github.com/SLCoding/server-sleep
+
+	@author: wiesendaniel (Daniel Wiesendorf)
+	@author: Japortie (Marcus Schütte)
 	@version: v0.1
 """
 import time
