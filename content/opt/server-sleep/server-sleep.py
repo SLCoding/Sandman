@@ -22,8 +22,6 @@
 """
 import time
 from time import gmtime, strftime
-import re
-import subprocess
 from ConfigParser import SafeConfigParser
 
 class serverSleep(object):

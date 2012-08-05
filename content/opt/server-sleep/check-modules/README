@@ -1,7 +1,6 @@
 How to register a Checkmodul
 ============================
-Simply and a new line with the modulname in the "enabledmoduls" file
-Don't forget to restart server-sleep
+n/a
 
 How to build own Checkmodul
 ===========================
