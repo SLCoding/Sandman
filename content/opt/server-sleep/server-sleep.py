@@ -64,9 +64,9 @@ def main(argv=None):
 				
 			elif option in ("-s", "--start"):
 				instance = serverSleep()
-				instance.log("server-sleep started", 3, True)
+				instance.logger.log("server-sleep started", 3, True)
 				instance.startup()
-				instance.log("server-sleep terminated", 3, True)
+				instance.logger.log("server-sleep terminated", 3, True)
 				break
 				
 			elif option in ("-c", "--configure"):

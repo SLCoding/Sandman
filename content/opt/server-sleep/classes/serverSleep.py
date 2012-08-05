@@ -1,34 +1,41 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
+import sys, os, time
+
 from ConfigParser import SafeConfigParser
 from log import log
-sys.path.append("../check-modules/")
+sys.path.append("check-modules/")
 
 class serverSleep (object):
 	def __init__(self):
 		# Read Configfile
 		config = SafeConfigParser()
-		config.read('../server-sleep.cfg')
+		config.read('server-sleep.cfg')
 		self.checkinterval = int(config.get('serverSleep', 'checkinterval'))
 		self.sleepcmd = config.get('serverSleep', 'sleepcmd')
 		self.enabledmodules = eval(config.get('serverSleep', 'enabledmodules'))
-		self.modules = None
+		self.modules = []
 		self.logger = log()
 		
 		for enabledmodule in self.enabledmodules:
-			self.modules.append(__import__(enabledmodule))
+			module = __import__(enabledmodule,  globals(), locals(), ['enabledmodule'], -1)
+			self.modules.append(module)
 		
 	def __del__(self):
 		pass
 	
 	def startup (self):
 		while True:	
-			self.logger.logger.log ("Wait " + str(self.general_checkinterval) + " secs...")
-			time.sleep(self.general_checkinterval)
+			self.logger.log ("Wait " + str(self.checkinterval) + " seconds...")
+			time.sleep(self.checkinterval)
 			
 			self.logger.log ("Checks started")
-			for enabledmodule in self.enabledmodules
-				status = self.modules.[enabledmodule].run()
+			i = 0
+			for module in self.modules:
+				print locals()
+				checkclass = locals()["modules"[self.enabledmodules[i]]]
+				status = module.checkclass.run()
+				i += 1
 				if status == 1:
 					continue
 				elif status == 2:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-
+import time
 from time import gmtime, strftime
 from ConfigParser import SafeConfigParser
 
@@ -8,7 +8,7 @@ class log (object):
 	def __init__(self):
 		# Read Configfile
 		config = SafeConfigParser()
-		config.read('../server-sleep.cfg')
+		config.read('server-sleep.cfg')
 		self.mode = int(config.get('log', 'mode'))
 		
 	def __del__(self):

@@ -54,11 +54,13 @@ check for computers in your network which are running
 	
 	@staticmethod
 	def configure():
-		pass
+		configurable = ("pingcheck", "hostlist", '("hostname","192.168.0.1")', "list of ip-addresses or hostnames to check")
+		configurable.append("pingcheck", "max_hosts", '0', "maximal amount of network devices allowed for putting the machine to sleep")
+		return configurable
 
 
 # for testing purpose
 if __name__ == '__main__':
 	print pingcheck.run()
-	pingcheck.configure()
+	print pingcheck.configure()
 	print pingcheck.__doc__
