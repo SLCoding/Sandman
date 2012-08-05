@@ -1,11 +1,6 @@
 How to register a Checkmodul
 ============================
-<<<<<<< HEAD:content/opt/server-sleep/check-modules/README.md
 n/a
-=======
-Simply add a new line with the modulname in the "enabledmoduls" file
-Don't forget to restart server-sleep
->>>>>>> dev-japortie:content/opt/server-sleep/check-modules/README
 
 How to build own Checkmodul
 ===========================
