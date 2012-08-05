@@ -45,13 +45,21 @@ class serverSleep(object):
 		self.checkip_max_hosts = int(config.get('checkip', 'max_hosts'))
 		self.critprocess_processnames = eval(config.get('critprocess', 'processnames'), {}, {})
 		self.critprocess_processids = eval(config.get('critprocess', 'processids'), {}, {})
-		self.general_debug = int(config.get('general', 'debug'))
+		self.general_logging = int(config.get('general', 'logging'))
 		
 	def __del__(self):
 		pass
-	
+	@staticmethod
 	def log (self, message, type_ = 3, importand = False):
-		if (type_ <= self.general_debug) or (self.general_debug!= 0 and importand == True):
+		# isset workaround; in case of static usage there will be no self.general_debug...
+		try:
+			logging = self.general_logging
+		except NameError:
+			config = SafeConfigParser()
+			config.read('server-sleep.cfg')
+			logging= int(config.get('general', 'logging'))
+			
+		if (type_ <= logging) or (logging!= 0 and importand == True):
 			type_str = None;
 			if type_ == 1:
 				type_str =  " ERROR: "
@@ -280,5 +288,6 @@ class serverSleep(object):
 if __name__ == '__main__':
 	instance = serverSleep()
 	instance.log("server-sleep started", 3, True)
+	serverSleep.log("test", 3, True)
 	instance.func_doCheck()
 	instance.log("server-sleep terminated", 3, True)
