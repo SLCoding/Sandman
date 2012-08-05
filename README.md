@@ -28,7 +28,7 @@ Using the install script
 ------------------------
 -	Download the last stable version or make a clone of this repo
 -	run the install.sh as root
--	now configure it by editing / or running "server-sleep -s"
+-	now configure it by editing / or running "server-sleep --configure"
 -	reboot or run "sudo /etc/init.d/server-sleep start"
 
 Hand made installation
