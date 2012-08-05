@@ -4,22 +4,23 @@ This project is not ready yet! If you want to use it, please wait until its read
 
 server-sleep
 ============
-server-sleep is a script that turns your home server to sleep if the server used. This will reduce your energy costs and extend your hardwares life.
-There are a bunch oaf conditions you can choose to check the state.
+server-sleep is a script that suspends your homeserver when it's not in use. This results in lower energy costs and extended hardware life.
+There are a bunch of conditions you can choose to check the state.
 -	Are local or ssh users logged in?
--	Are Computers in the Network runnig?
--	Is pyLoad downloading things?
--	Are all critical processes done?
+-	Are computers in the network running?
+-	Is pyLoad downloading?
+-	Are processes running which shouldn't be interruptet?
 - 	...
-You can choose which these conditions will be checked.
+
+You can choose which of these conditions will be checked.
 
 Installation
 ============
-Its tested on Ubuntu 12.04 and Debian Wheezy.
+Its tested on Ubuntu 12.04 and Debian Squeeze.
 
 Requirements
 ------------
-The installation script will check for requirements. We recomment to install all to get the full range of features
+The installation script will check for requirements. We recommend to install all to enable the full range of features
 -	python	(Hey, its written in python… you need it!)
 -	...
 
@@ -34,10 +35,10 @@ Hand made installation
 ----------------------
 -	also not ready yet...
 
-Why we did this code?
+Why we developed this
 =====================
 We coded this for our personal needs. Some members of our team have home servers and don't want them to run 24/7. So, we did this. ;-)
-If you've got some good idea to improve this Project let us know or fork it and code it by yourself. Maybe we consider your idea as good. Who knows, it could be included in the future.
+If you've got some good idea to improve this project let us know o,r fork it and code it by yourself. Who knows, maybe your idea is awesome enough for us to include it in our awesome project. ;)
 
 License
 =======
