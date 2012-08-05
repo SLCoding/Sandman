@@ -4,7 +4,7 @@ n/a
 
 How to build own Checkmodul
 ===========================
--	Creat a new .py file.
+-	Create a new .py file.
 -	Name it what ever you want (e.g. 1337check.py)
 -	Create a Class in it with the same name! (e.g. class 1337check(object))
 -	Implement a staticmethod which name have to be run
