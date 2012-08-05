@@ -8,7 +8,7 @@ import subprocess
 sys.path.append("../classes/")
 from log import log
 
-class pingcheck(object):
+class check(object):
 	"""
 check for computers in your network which are running
 	"""
@@ -48,7 +48,7 @@ check for computers in your network which are running
 	
 	@staticmethod
 	def run():
-		instance = pingcheck()
+		instance = check()
 		instance.logger.log ("Pingcheck: check started")
 		return instance.check()
 	
@@ -61,6 +61,6 @@ check for computers in your network which are running
 
 # for testing purpose
 if __name__ == '__main__':
-	print pingcheck.run()
-	print pingcheck.configure()
-	print pingcheck.__doc__
+	print check.run()
+	print check.configure()
+	print check.__doc__
