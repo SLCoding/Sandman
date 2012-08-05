@@ -17,9 +17,13 @@ class serverSleep (object):
 		self.modules = []
 		self.logger = log()
 		
+		
 		for enabledmodule in self.enabledmodules:
-			module = __import__(enabledmodule,  globals(), locals(), ['enabledmodule'], -1)
+			module = __import__(enabledmodule,  globals(), locals(), [enabledmodule], -1)
 			self.modules.append(module)
+			
+		print self.modules
+		print self.enabledmodules
 		
 	def __del__(self):
 		pass
@@ -30,18 +34,20 @@ class serverSleep (object):
 			time.sleep(self.checkinterval)
 			
 			self.logger.log ("Checks started")
-			i = 0
-			for module in self.modules:
-				print locals()
-				checkclass = locals()["modules"[self.enabledmodules[i]]]
-				status = module.checkclass.run()
-				i += 1
-				if status == 1:
-					continue
-				elif status == 2:
-					break
-				elif status ==  -1:
-					self.logger.log (enabledmodule + "failed!", 1)
+			#print locals()
+			
+# 			i = 0
+# 			for module in self.modules:
+# 				checkclass = locals()[module[self.enabledmodules[i]]]
+				
+# 				status = module.checkclass.run()
+# 				i += 1
+# 				if status == 1:
+# 					continue
+# 				elif status == 2:
+# 					break
+# 				elif status ==  -1:
+# 					self.logger.log (enabledmodule + "failed!", 1)
 
 			self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
 			os.system(self.sleepcmd);

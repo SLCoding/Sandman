@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import sys
-import getopt
+#import getopt
 from ConfigParser import SafeConfigParser
 import subprocess
 sys.path.append("../classes/")
