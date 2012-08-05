@@ -36,7 +36,7 @@ Hand made installation
 
 Why we did this code?
 =====================
-We coded this for our personal needs. Some members of our team have home servers and don't want to run the 24/7. So, we did this. ;-)
+We coded this for our personal needs. Some members of our team have home servers and don't want them to run 24/7. So, we did this. ;-)
 If you've got some good idea to improve this Project let us know or fork it and code it by yourself. Maybe we consider your idea as good. Who knows, it could be included in the future.
 
 License
