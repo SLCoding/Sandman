@@ -1,8 +1,8 @@
-How to register a Checkmodul
+How to register a checkmodul
 ============================
 Run `server-sleep --configure` as root
 
-How to build own Checkmodul
+How to build own checkmodul
 ===========================
 -	Create a new .py file.
 -	Name it what ever you want (e.g. examplecheck.py)
@@ -19,7 +19,7 @@ How to build own Checkmodul
 If you need an example look 3 lines below or at one of the existing checks. pingcheck.py should be a simple one...
 Happy coding ;-)
 
-Example check script
+Example checkmodul
 ====================
 You find this example in the additional folder.
 Please don't copy the lines below. Trust me, you won't be happy!
