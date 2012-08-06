@@ -23,7 +23,7 @@ Example check script
 ====================
 You find this example in the additional folder.
 Please don't copy the lines below. Trust me, you won't be happy!
-`
+<code>
 	#!/usr/bin/env python
 	#-*- coding: utf-8 -*-
 	
@@ -92,4 +92,4 @@ Please don't copy the lines below. Trust me, you won't be happy!
 		print usercheck.run()
 		print usercheck.configure()
 		print usercheck.__doc__
-`
+</code>
