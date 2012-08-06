@@ -63,6 +63,6 @@ Write what your check do here!
 # if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
 	os.chdir('../')
-	print usercheck.run()
-	print usercheck.configure()
-	print usercheck.__doc__
+	print example.run()
+	print example.configure()
+	print example.__doc__
