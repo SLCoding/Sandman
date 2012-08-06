@@ -21,11 +21,11 @@ Happy coding ;-)
 
 Example check script
 ====================
-You find this example here https://github.com/SLCoding/server-sleep/blob/dev-wiesendaniel/additional/check-modul-example/example.py
+You find this example in the additional folder.
 Please don't copy the lines below. Trust me, you won't be happy!
 `
-\#!/usr/bin/env python
-\#-*- coding: utf-8 -*-
+&%23;!/usr/bin/env python
+&%23;-*- coding: utf-8 -*-
 
 import sys, os
 from ConfigParser import SafeConfigParser
@@ -85,8 +85,8 @@ Write what your check do here!
 		return configurable
 
 
-\# for testing purpose
-\# if you run "python example.py" the important functions will be executed
+&%23; for testing purpose
+&%23; if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
 	os.chdir('../')
 	print usercheck.run()
