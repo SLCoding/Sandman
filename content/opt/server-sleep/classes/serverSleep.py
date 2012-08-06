@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 import sys, os, time
+import importlib
 
 from ConfigParser import SafeConfigParser
 from log import log
@@ -17,9 +18,8 @@ class serverSleep (object):
 		self.modules = []
 		self.logger = log()
 		
-		
 		for enabledmodule in self.enabledmodules:
-			module = __import__(enabledmodule,  globals(), locals(), [enabledmodule], -1)
+			module = importlib.import_module(enabledmodule, enabledmodule)
 			self.modules.append(module)
 			
 	def __del__(self):
@@ -31,24 +31,16 @@ class serverSleep (object):
 			time.sleep(self.checkinterval)
 			
 			self.logger.log ("Checks started")
-			
 			for module in self.modules:
-				print module
-				#status = module.check.run()
-				#print status
-				
-				#print self.enabledmodule.index(enabledmodule)
-				#print self.modules.index(enabledmodule)
-				#print locals()[module[self.enabledmodules[i]]]
-				
-# 				status = module.checkclass.run()
-# 				i += 1
-# 				if status == 1:
-# 					continue
-# 				elif status == 2:
-# 					break
-# 				elif status ==  -1:
-# 					self.logger.log (enabledmodule + "failed!", 1)
+				name = self.enabledmodules[self.modules.index(module)]
+				status = getattr(module, name).run()
+
+				if status == 1:
+					continue
+				elif status == 2:
+					break
+				elif status ==  -1:
+					self.logger.log (name + " failed!", 1)
 
 			self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
 			os.system(self.sleepcmd);

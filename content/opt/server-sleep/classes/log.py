@@ -18,11 +18,11 @@ class log (object):
 		if (type_ <= self.mode) or (self.mode!= 0 and importand == True):
 			type_str = None;
 			if type_ == 1:
-				type_str =  " ERROR: "
+				type_str =  " ERROR:   "
 			elif type_ == 2:
 				type_str =  " WARNING: "
 			elif type_ == 3:
-				type_str =  " INFO: "
+				type_str =  " INFO:    "
 			else:
 				type_str =  " UNKNOWN: "
 			
