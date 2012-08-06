@@ -2,7 +2,6 @@
 #-*- coding: utf-8 -*-
 
 import sys
-#import getopt
 from ConfigParser import SafeConfigParser
 import subprocess
 sys.path.append("../classes/")
@@ -16,7 +15,7 @@ check if pyLoad is currently downloading
 		# Read Configfile
 		config = SafeConfigParser()
 		config.read('pyloadcheck.cfg')
-		self.path = eval(config.get('pyloadcheck', 'path'))
+		self.path = str(config.get('pyloadcheck', 'path'))
 		self.logger = log()
 		
 	def __del__(self):
@@ -48,12 +47,14 @@ check if pyLoad is currently downloading
 	
 	@staticmethod
 	def configure():
-		configurable = ("pyloadcheck", "path", "/usr/bin/", "path where the pyLoad binaries are stored")
+		configurable = []
+		configurable.append(["pyloadcheck", "path", "/usr/bin/", "path where the pyLoad binaries are stored"])
 		return configurable
 
 
 # for testing purpose
 if __name__ == '__main__':
+	os.chdir('../')
 	print pingcheck.run()
 	print pingcheck.configure()
 	print pingcheck.__doc__
