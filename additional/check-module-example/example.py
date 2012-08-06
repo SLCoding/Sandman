@@ -1,31 +1,5 @@
-How to register a Checkmodul
-============================
-Run `server-sleep --configure` as root
-
-How to build own Checkmodul
-===========================
--	Create a new .py file.
--	Name it what ever you want (e.g. examplecheck.py)
--	Create a Class in it with the same name! (e.g. class examplecheck(object))
--	Implement a staticmethod which name have to be run
-	-	return values have to be:
-		0 -> conditions ok for going to sleep
-		1 -> don't sleep
-		2 -> go to sleep, no matter whar other checks say
-		-1 -> an error occurred
--	implemnt a static method configure() which contains configfile information
--	a staticmethod called info() which returns a short description would be nice
-	
-If you need an example look 3 lines below or at one of the existing checks. pingcheck.py should be a simple one...
-Happy coding ;-)
-
-Example check script
-====================
-You find this example here https://github.com/SLCoding/server-sleep/blob/dev-wiesendaniel/additional/check-modul-example/example.py
-Please don't copy the lines below. Trust me, you won't be happy!
-`
-\#!/usr/bin/env python
-\#-*- coding: utf-8 -*-
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import sys, os
 from ConfigParser import SafeConfigParser
@@ -55,7 +29,7 @@ Write what your check do here!
 		try:
 			# do your check stuff here
 			
-			# things you need:
+			# things you need_
 			#
 			# retrun 0 -> don't go to sleep. here is something to wait for
 			# return 1 -> ready for sleep
@@ -85,11 +59,10 @@ Write what your check do here!
 		return configurable
 
 
-\# for testing purpose
-\# if you run "python example.py" the important functions will be executed
+# for testing purpose
+# if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
 	os.chdir('../')
 	print usercheck.run()
 	print usercheck.configure()
 	print usercheck.__doc__
-`
