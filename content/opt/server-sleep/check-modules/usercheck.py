@@ -100,7 +100,7 @@ check for users which are logged in
 			self.logger.log("Remote: " + str(remote_user))
 			
 			if((self.max_usr < user and self.max_usr >=0) or (self.max_usr_local < local_user and self.max_usr_local >= 0) or (self.max_usr_remote < remote_user and self.max_usr_remote >= 0)):
-				self.logger.log("User: Not Ready for sleep! More users active then allowed!", 2)
+				self.logger.log("User: Not Ready for sleep! More users active than allowed!", 2)
 				return 1
 			
 			self.logger.log("User: Ready for sleep!")

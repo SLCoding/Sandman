@@ -23,7 +23,7 @@ check if pyLoad is currently downloading
 	
 	def check(self):
 		try:
-			CheckExprs = ("No downloads running", "Could not establish")
+			CheckExprs = ("No downloads running", "Could not establish connection")
 			
 			cmd = "pyLoadCli status"
 			ps = subprocess.Popen(path + cmd, shell=True, stdout=subprocess.PIPE)
@@ -33,8 +33,10 @@ check if pyLoad is currently downloading
 			ps.wait()
 			for Expr in CheckExprs:
 				if (re.match(CheckString, output)):
-					self.log("pyLoad: Ready for sleep!")
+					self.log("pyLoadCheck: Ready for sleep! PyLoad is idle.")
 					return 0
+			
+			self.log("pyLoadCheck: Not Ready for sleep! PyLoad is working.")
 			return 1
 		except:
 			return -1

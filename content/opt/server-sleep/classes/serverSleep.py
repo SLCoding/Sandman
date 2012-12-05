@@ -30,6 +30,8 @@ class serverSleep (object):
 			self.logger.log ("Wait " + str(self.checkinterval) + " seconds...")
 			time.sleep(self.checkinterval)
 			
+			result = True
+			
 			self.logger.log ("Checks started")
 			status = None
 			for module in self.modules:
@@ -37,13 +39,14 @@ class serverSleep (object):
 				status = getattr(module, name).run()
 
 				if status == 1:
-					continue
+					result = False
 				elif status == 2:
+					result = True
 					break
 				elif status ==  -1:
 					self.logger.log (name + " failed!", 1)
 			
-			if (status == 1):
+			if (result == False):
 				continue
 
 			self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
