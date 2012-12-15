@@ -18,7 +18,7 @@ Get more information at: https://github.com/SLCoding/server-sleep
 
 @author: wiesendaniel (Daniel Wiesendorf)
 @author: Japortie (Marcus Schütte)
-@version: v0.1
+@version: v0.3
 """
 
 import os, sys
