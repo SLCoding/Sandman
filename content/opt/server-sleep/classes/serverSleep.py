@@ -3,7 +3,7 @@
 import sys, os, time
 import importlib
 
-from ConfigParser import SafeConfigParser
+import configparser
 from log import log
 
 sys.path.append("check-modules/")
@@ -12,7 +12,7 @@ sys.path.append("check-modules/")
 class serverSleep(object):
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('server-sleep.cfg')
         self.checkinterval = int(config.get('serverSleep', 'checkinterval'))
         self.sleepcmd = config.get('serverSleep', 'sleepcmd')

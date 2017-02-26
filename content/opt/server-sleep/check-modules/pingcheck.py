@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, os
-from ConfigParser import SafeConfigParser
+import configparser
 import subprocess
 
 sys.path.append("../classes/")
@@ -16,7 +16,7 @@ check for computers in your network which are running
 
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('check-modules/pingcheck.cfg')
         self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
         self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
@@ -67,6 +67,6 @@ check for computers in your network which are running
 # for testing purpose
 if __name__ == '__main__':
     os.chdir('../')
-    print pingcheck.run()
-    print pingcheck.configure()
-    print pingcheck.__doc__
+    print(pingcheck.run())
+    print(pingcheck.configure())
+    print(pingcheck.__doc__)

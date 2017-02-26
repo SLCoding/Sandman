@@ -50,17 +50,17 @@ def main(argv=None):
     try:
         try:
             opts, args = getopt.getopt(argv[1:], "huscl", ["help", "usage", "start", "configure", "log"])
-        except getopt.error, msg:
+        except getopt.error as msg:
             raise Usage(msg)
 
         # option processing; breaks are written because only the first option is important
         for option, value in opts:
             if option in ("-h", "--help"):
-                print __doc__
+                print(__doc__)
                 break
 
             elif option in ("-u", "--usage"):
-                print self.__doc__
+                print(self.__doc__)
                 break
 
             elif option in ("-s", "--start"):
@@ -71,17 +71,17 @@ def main(argv=None):
                 break
 
             elif option in ("-c", "--configure"):
-                print "configure"
+                print("configure")
                 break
             elif option in ("-l", "--log"):
-                print "show logfile..."
+                print("show logfile...")
                 break
 
         return 0
 
-    except Usage, err:
-        print str(err.msg)
-        print "for help use --help or --usage"
+    except Usage as err:
+        print(str(err.msg))
+        print("for help use --help or --usage")
         return 2
 
 

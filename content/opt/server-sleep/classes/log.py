@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 import time
 from time import gmtime, strftime
-from ConfigParser import SafeConfigParser
+import configparser
 
 
 class log(object):
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('server-sleep.cfg')
         self.mode = int(config.get('log', 'mode'))
         self.path = config.get('log', 'file')
@@ -35,9 +35,9 @@ class log(object):
                 type_str = " UNKNOWN: "
 
             if (self.path == "" or self.printanyway == 1):
-                print strftime("%Y-%m-%d %H:%M:%S", gmtime()) + type_str + message
+                print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + type_str + message)
             if (self.path != ""):
                 try:
                     self.logfile.write(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + type_str + message)
                 except:
-                    print " ERROR:  Can't access logfile!"
+                    print(" ERROR:  Can't access logfile!")

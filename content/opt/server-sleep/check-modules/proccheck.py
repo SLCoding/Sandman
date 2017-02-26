@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, signal, subprocess, re
-from ConfigParser import SafeConfigParser
+import configparser
 
 sys.path.append("../classes/")
 from log import log
@@ -15,7 +15,7 @@ Write what your check do here!
 
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('check-modules/proccheck.cfg')
 
         # add your options here like this:
@@ -62,6 +62,6 @@ Write what your check do here!
 # if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
     os.chdir('../')
-    print proccheck.run()
-    print proccheck.configure()
-    print proccheck.__doc__
+    print(proccheck.run())
+    print(proccheck.configure())
+    print(proccheck.__doc__)
