@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 Get more information at: https://github.com/SLCoding/server-sleep
 
 @author: wiesendaniel (Daniel Wiesendorf)
-@author: Japortie (Marcus Schütte)
+@author: Japortie (Marcus Schï¿½tte)
 @version: v0.3
 """
 
@@ -30,59 +30,60 @@ from serverSleep import serverSleep
 
 
 class Usage(Exception):
-	def __init__(self, msg):
-		self.msg = msg
+    def __init__(self, msg):
+        self.msg = msg
+
 
 def main(argv=None):
-	"""
-	usage: server-sleep [-h] [--help]
-	                    [-u] [--usage]
-	                    [-s] [--start]
-	                    [-c] [--configure]
-	                    [-l] [--log]
-	"""
-	if not os.geteuid()==0:
-		sys.exit("Only root can run this script")
-		
-	if argv is None:
-		argv = sys.argv
-	try:
-		try:
-			opts, args = getopt.getopt(argv[1:], "huscl", ["help", "usage", "start", "configure", "log"])
-		except getopt.error, msg:
-			raise Usage(msg)
-		
-		# option processing; breaks are written because only the first option is important
-		for option, value in opts:
-			if option in ("-h", "--help"):
-				print __doc__
-				break
-				
-			elif option in ("-u", "--usage"):
-				print self.__doc__
-				break
-				
-			elif option in ("-s", "--start"):
-				instance = serverSleep()
-				instance.logger.log("server-sleep started", 3, True)
-				instance.startup()
-				instance.logger.log("server-sleep terminated", 3, True)
-				break
-				
-			elif option in ("-c", "--configure"):
-				print "configure"
-				break
-			elif option in ("-l", "--log"):
-				print "show logfile..."
-				break
-			
-		return 0
+    """
+    usage: server-sleep [-h] [--help]
+                        [-u] [--usage]
+                        [-s] [--start]
+                        [-c] [--configure]
+                        [-l] [--log]
+    """
+    if not os.geteuid() == 0:
+        sys.exit("Only root can run this script")
 
-	except Usage, err:
-		print str(err.msg)
-		print "for help use --help or --usage"
-		return 2
+    if argv is None:
+        argv = sys.argv
+    try:
+        try:
+            opts, args = getopt.getopt(argv[1:], "huscl", ["help", "usage", "start", "configure", "log"])
+        except getopt.error, msg:
+            raise Usage(msg)
+
+        # option processing; breaks are written because only the first option is important
+        for option, value in opts:
+            if option in ("-h", "--help"):
+                print __doc__
+                break
+
+            elif option in ("-u", "--usage"):
+                print self.__doc__
+                break
+
+            elif option in ("-s", "--start"):
+                instance = serverSleep()
+                instance.logger.log("server-sleep started", 3, True)
+                instance.startup()
+                instance.logger.log("server-sleep terminated", 3, True)
+                break
+
+            elif option in ("-c", "--configure"):
+                print "configure"
+                break
+            elif option in ("-l", "--log"):
+                print "show logfile..."
+                break
+
+        return 0
+
+    except Usage, err:
+        print str(err.msg)
+        print "for help use --help or --usage"
+        return 2
 
 
 if __name__ == "__main__":
-	sys.exit(main())
+    sys.exit(main())
