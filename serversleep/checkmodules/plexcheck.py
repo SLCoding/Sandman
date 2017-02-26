@@ -4,7 +4,7 @@
 import sys, os, signal, subprocess, re, datetime
 import configparser
 sys.path.append("../classes/")
-from log import log
+from serversleep.log import log
 
 
 class plexcheck(object):
@@ -15,7 +15,7 @@ Check if Plex had any connections or streams in a configurable time
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('check-modules/plexcheck.cfg')
+        config.read('../serversleep/checkmodules/plexcheck.cfg')
 
         # add your options here like this:
         self.conf_idletime = int(config.get('plexcheck', 'idletime'))

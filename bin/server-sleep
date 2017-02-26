@@ -24,9 +24,9 @@ Get more information at: https://github.com/SLCoding/server-sleep
 import os, sys
 import getopt
 
-sys.path.append("classes/")
-from log import log
-from serverSleep import serverSleep
+#sys.path.append("classes/")
+from serversleep.log import log
+from serversleep.serverSleep import serverSleep
 
 
 class Usage(Exception):

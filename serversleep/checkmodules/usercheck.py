@@ -6,7 +6,7 @@ import subprocess
 import configparser
 
 sys.path.append("../classes/")
-from log import log
+from serversleep.log import log
 
 
 class usercheck(object):
@@ -17,7 +17,7 @@ check for users which are logged in
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('check-modules/usercheck.cfg')
+        config.read('../serversleep/checkmodules/usercheck.cfg')
         self.max_usr = int(config.get('usercheck', 'max_usr'))
         self.max_usr_local = int(config.get('usercheck', 'max_usr_local'))
         self.max_usr_remote = int(config.get('usercheck', 'max_usr_remote'))
