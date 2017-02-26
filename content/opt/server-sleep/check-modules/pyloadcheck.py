@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from ConfigParser import SafeConfigParser
+import configparser
 import subprocess
 
 sys.path.append("../classes/")
@@ -16,7 +16,7 @@ check if pyLoad is currently downloading
 
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('pyloadcheck.cfg')
         self.path = str(config.get('pyloadcheck', 'path'))
         self.logger = log()

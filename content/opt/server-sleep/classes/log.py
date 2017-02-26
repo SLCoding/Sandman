@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 import time
 from time import gmtime, strftime
-from ConfigParser import SafeConfigParser
+import configparser
 
 
 class log(object):
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('server-sleep.cfg')
         self.mode = int(config.get('log', 'mode'))
         self.path = config.get('log', 'file')

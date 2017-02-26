@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, re
-from ConfigParser import SafeConfigParser
 import subprocess
+import configparser
 
 sys.path.append("../classes/")
 from log import log
@@ -16,7 +16,7 @@ check for users which are logged in
 
     def __init__(self):
         # Read Configfile
-        config = SafeConfigParser()
+        config = configparser.ConfigParser()
         config.read('check-modules/usercheck.cfg')
         self.max_usr = int(config.get('usercheck', 'max_usr'))
         self.max_usr_local = int(config.get('usercheck', 'max_usr_local'))
