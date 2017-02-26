@@ -5,7 +5,7 @@ import sys, os, signal, subprocess, re
 import configparser
 
 sys.path.append("../classes/")
-from log import log
+from serversleep.log import log
 
 
 class proccheck(object):
@@ -16,7 +16,7 @@ Write what your check do here!
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('check-modules/proccheck.cfg')
+        config.read('../serversleep/checkmodules/proccheck.cfg')
 
         # add your options here like this:
         self.procs = eval(config.get('proccheck', 'procs'), {}, {})

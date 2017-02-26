@@ -6,7 +6,7 @@ import configparser
 import subprocess
 
 sys.path.append("../classes/")
-from log import log
+from serversleep.log import log
 
 
 class pyloadcheck(object):
@@ -17,7 +17,7 @@ check if pyLoad is currently downloading
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('pyloadcheck.cfg')
+        config.read('../serversleep/checkmodules/pyloadcheck.cfg')
         self.path = str(config.get('pyloadcheck', 'path'))
         self.logger = log()
 

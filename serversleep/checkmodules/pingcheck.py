@@ -5,8 +5,7 @@ import sys, os
 import configparser
 import subprocess
 
-sys.path.append("../classes/")
-from log import log
+from serversleep.log import log
 
 
 class pingcheck(object):
@@ -17,7 +16,7 @@ check for computers in your network which are running
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('check-modules/pingcheck.cfg')
+        config.read('../serversleep/checkmodules/pingcheck.cfg')
         self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
         self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
         self.logger = log()

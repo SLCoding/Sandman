@@ -4,10 +4,7 @@ import sys, os, time
 import importlib
 
 import configparser
-from log import log
-
-sys.path.append("check-modules/")
-
+from serversleep.log import log
 
 class serverSleep(object):
     def __init__(self):
@@ -21,7 +18,7 @@ class serverSleep(object):
         self.logger = log()
 
         for enabledmodule in self.enabledmodules:
-            module = importlib.import_module(enabledmodule, enabledmodule)
+            module = importlib.import_module("serversleep.checkmodules." + enabledmodule, enabledmodule)
             self.modules.append(module)
 
     def __del__(self):
