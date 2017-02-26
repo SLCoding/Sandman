@@ -50,7 +50,7 @@ def main(argv=None):
     try:
         try:
             opts, args = getopt.getopt(argv[1:], "huscl", ["help", "usage", "start", "configure", "log"])
-        except getopt.error, msg:
+        except getopt.error as msg:
             raise Usage(msg)
 
         # option processing; breaks are written because only the first option is important
