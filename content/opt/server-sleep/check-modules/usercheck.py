@@ -136,6 +136,6 @@ check for users which are logged in
 # for testing purpose
 if __name__ == '__main__':
     os.chdir('../')
-    print usercheck.run()
-    print usercheck.configure()
-    print usercheck.__doc__
+    print(usercheck.run())
+    print(usercheck.configure())
+    print(usercheck.__doc__)

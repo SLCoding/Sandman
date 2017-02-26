@@ -76,6 +76,6 @@ Check if Plex had any connections or streams in a configurable time
 # if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
     os.chdir('../')
-    print plexcheck.run()
-    print plexcheck.configure()
-    print plexcheck.__doc__
+    print(plexcheck.run())
+    print(plexcheck.configure())
+    print(plexcheck.__doc__)

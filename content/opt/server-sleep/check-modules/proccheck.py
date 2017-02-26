@@ -62,6 +62,6 @@ Write what your check do here!
 # if you run "python example.py" the important functions will be executed
 if __name__ == '__main__':
     os.chdir('../')
-    print proccheck.run()
-    print proccheck.configure()
-    print proccheck.__doc__
+    print(proccheck.run())
+    print(proccheck.configure())
+    print(proccheck.__doc__)

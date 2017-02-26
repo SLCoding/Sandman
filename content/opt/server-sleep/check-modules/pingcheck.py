@@ -67,6 +67,6 @@ check for computers in your network which are running
 # for testing purpose
 if __name__ == '__main__':
     os.chdir('../')
-    print pingcheck.run()
-    print pingcheck.configure()
-    print pingcheck.__doc__
+    print(pingcheck.run())
+    print(pingcheck.configure())
+    print(pingcheck.__doc__)
