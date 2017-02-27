@@ -4,11 +4,10 @@
 import sys, os, signal, subprocess, re
 import configparser
 
-sys.path.append("../classes/")
 from serversleep.log import log
+from server_sleep_api import PluginInterface
 
-
-class proccheck(object):
+class proccheck(PluginInterface.AbstractCheckPlugin):
     """
 Write what your check do here!
     """
@@ -57,6 +56,11 @@ Write what your check do here!
         configurable.append(["proccheck", "procs", '0', "Regular Expressions for the processes to check for"])
         return configurable
 
+    def sleep(self):
+        pass
+
+    def wake(self):
+        pass
 
 # for testing purpose
 # if you run "python example.py" the important functions will be executed

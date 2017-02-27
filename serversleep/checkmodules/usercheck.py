@@ -5,11 +5,10 @@ import sys, os, re
 import subprocess
 import configparser
 
-sys.path.append("../classes/")
 from serversleep.log import log
+from server_sleep_api import PluginInterface
 
-
-class usercheck(object):
+class usercheck(PluginInterface.AbstractCheckPlugin):
     """
 check for users which are logged in
     """
@@ -132,6 +131,11 @@ check for users which are logged in
                              "time in sec. user which idle above this time are not counted | -1 = no timeout all user are counted"])
         return configurable
 
+    def sleep(self):
+        pass
+
+    def wake(self):
+        pass
 
 # for testing purpose
 if __name__ == '__main__':

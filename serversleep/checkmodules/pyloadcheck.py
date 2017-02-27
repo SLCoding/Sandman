@@ -5,11 +5,10 @@ import sys
 import configparser
 import subprocess
 
-sys.path.append("../classes/")
 from serversleep.log import log
+from server_sleep_api import PluginInterface
 
-
-class pyloadcheck(object):
+class pyloadcheck(PluginInterface.AbstractCheckPlugin):
     """
 check if pyLoad is currently downloading
     """
@@ -55,6 +54,12 @@ check if pyLoad is currently downloading
         configurable = []
         configurable.append(["pyloadcheck", "path", "/usr/bin/", "path where the pyLoad binaries are stored"])
         return configurable
+
+    def sleep(self):
+        pass
+
+    def wake(self):
+        pass
 
 
 # for testing purpose

@@ -3,11 +3,10 @@
 
 import sys, os, signal, subprocess, re, datetime
 import configparser
-sys.path.append("../classes/")
 from serversleep.log import log
+from server_sleep_api import PluginInterface
 
-
-class plexcheck(object):
+class plexcheck(PluginInterface.AbstractCheckPlugin):
     """
 Check if Plex had any connections or streams in a configurable time
     """
@@ -70,6 +69,11 @@ Check if Plex had any connections or streams in a configurable time
         configurable.append(["plexcheck", "timeformat", '%b %d, %Y %H:%M:%S', "Time format plex uses in logfile"])
         return configurable
 
+    def sleep(self):
+        pass
+
+    def wake(self):
+        pass
 
 # for testing purpose
 # if you run "python example.py" the important functions will be executed
