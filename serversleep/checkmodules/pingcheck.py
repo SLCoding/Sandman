@@ -63,11 +63,9 @@ check for computers in your network which are running
                              "maximal amount of network devices allowed for putting the machine to sleep"])
         return configurable
 
-    @staticmethod
     def sleep(self):
         pass
 
-    @staticmethod
     def wake(self):
         pass
 
