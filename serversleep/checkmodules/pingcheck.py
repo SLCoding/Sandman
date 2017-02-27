@@ -6,9 +6,10 @@ import configparser
 import subprocess
 
 from serversleep.log import log
+from server_sleep_api import PluginInterface
 
 
-class pingcheck(object):
+class pingcheck(PluginInterface.AbstractCheckPlugin):
     """
 check for computers in your network which are running
     """
@@ -62,6 +63,13 @@ check for computers in your network which are running
                              "maximal amount of network devices allowed for putting the machine to sleep"])
         return configurable
 
+    @staticmethod
+    def sleep(self):
+        pass
+
+    @staticmethod
+    def wake(self):
+        pass
 
 # for testing purpose
 if __name__ == '__main__':
