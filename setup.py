@@ -11,6 +11,7 @@ setup(name='server-sleep',
                 'serversleep.checkmodules'],
       scripts=['bin/server-sleep'],
       install_requires=[
+          'server-sleep-api',
           'configparser'
       ],
       zip_safe=False)

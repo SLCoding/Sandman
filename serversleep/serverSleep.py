@@ -4,6 +4,7 @@ import sys, os, time
 import importlib
 
 import configparser
+from server_sleep_api import PluginInterface
 from serversleep.log import log
 
 class serverSleep(object):
@@ -19,7 +20,11 @@ class serverSleep(object):
 
         for enabledmodule in self.enabledmodules:
             module = importlib.import_module("serversleep.checkmodules." + enabledmodule, enabledmodule)
-            self.modules.append(module)
+            if isinstance(module, PluginInterface):
+                self.modules.append(module)
+                self.logger.log("Module loaded: " + enabledmodule, 3, True)
+            else:
+                self.logger.log("Loaded Module appears to be no CheckPlugin: " + enabledmodule, 1, True)
 
     def __del__(self):
         pass
