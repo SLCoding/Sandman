@@ -7,6 +7,7 @@ import configparser
 from server_sleep_api import PluginInterface
 from serversleep.log import log
 
+
 class serverSleep(object):
     def __init__(self):
         # Read Configfile
@@ -50,7 +51,7 @@ class serverSleep(object):
                 elif status == -1:
                     self.logger.log(name + " failed!", 1)
 
-            if (result == False):
+            if not result:
                 continue
 
             self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
