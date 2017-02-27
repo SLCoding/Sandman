@@ -5,7 +5,6 @@ import sys
 import configparser
 import subprocess
 
-sys.path.append("../classes/")
 from serversleep.log import log
 
 

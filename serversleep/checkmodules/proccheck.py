@@ -4,7 +4,6 @@
 import sys, os, signal, subprocess, re
 import configparser
 
-sys.path.append("../classes/")
 from serversleep.log import log
 
 
