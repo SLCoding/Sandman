@@ -16,13 +16,14 @@ class serverSleep(object):
         self.checkinterval = int(config.get('serverSleep', 'checkinterval'))
         self.sleepcmd = config.get('serverSleep', 'sleepcmd')
         self.enabledmodules = eval(config.get('serverSleep', 'enabledmodules'))
-        self.modules = []
+        self.plugins = []
         self.logger = log()
 
         for enabledmodule in self.enabledmodules:
             module = importlib.import_module("serversleep.checkmodules." + enabledmodule, enabledmodule)
-            if isinstance(module, PluginInterface.AbstractCheckPlugin):
-                self.modules.append(module)
+            plugin = getattr(module, enabledmodule)()
+            if isinstance(plugin, PluginInterface.AbstractCheckPlugin):
+                self.plugins.append(plugin)
                 self.logger.log("Module loaded: " + enabledmodule, 3, True)
             else:
                 self.logger.log("Loaded Module appears to be no CheckPlugin: " + enabledmodule, 1, True)
@@ -39,9 +40,9 @@ class serverSleep(object):
 
             self.logger.log("Checks started")
             status = None
-            for module in self.modules:
-                name = self.enabledmodules[self.modules.index(module)]
-                status = getattr(module, name).run()
+            for plugin in self.plugins:
+                pluginName = plugin.__class__.__name__
+                status = plugin.run()
 
                 if status == 1:
                     result = False
@@ -49,7 +50,7 @@ class serverSleep(object):
                     result = True
                     break
                 elif status == -1:
-                    self.logger.log(name + " failed!", 1)
+                    self.logger.log(pluginName + " failed!", 1)
 
             if not result:
                 continue
