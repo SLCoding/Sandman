@@ -42,7 +42,7 @@ class serverSleep(object):
             status = None
             for plugin in self.plugins:
                 pluginName = plugin.__class__.__name__
-                status = plugin.run()
+                status = plugin.check()
 
                 if status == 1:
                     result = False
