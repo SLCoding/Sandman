@@ -20,7 +20,7 @@ class serverSleep(object):
 
         for enabledmodule in self.enabledmodules:
             module = importlib.import_module("serversleep.checkmodules." + enabledmodule, enabledmodule)
-            if isinstance(module, PluginInterface):
+            if isinstance(module, PluginInterface.AbstractCheckPlugin):
                 self.modules.append(module)
                 self.logger.log("Module loaded: " + enabledmodule, 3, True)
             else:
