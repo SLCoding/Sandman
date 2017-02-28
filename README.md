@@ -1,3 +1,10 @@
+**Build status**
+
+master:
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=master)](https://travis-ci.org/SLCoding/server-sleep)
+develop:
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=develop)](https://travis-ci.org/SLCoding/server-sleep)
+
 TODO: Rewrite this!
 Please Wait!
 ============
