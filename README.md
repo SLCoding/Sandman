@@ -1,3 +1,4 @@
+TODO: Rewrite this!
 Please Wait!
 ============
 This project is not ready yet! If you want to use it, please wait until its ready. At this moment you won't have much fun with this dev version.
