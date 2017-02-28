@@ -4,8 +4,8 @@ import sys, os, time
 import importlib
 
 import configparser
+import logging
 from server_sleep_api import PluginInterface
-from serversleep.log import log
 
 
 class serverSleep(object):
@@ -17,28 +17,28 @@ class serverSleep(object):
         self.sleepcmd = config.get('serverSleep', 'sleepcmd')
         self.enabledmodules = eval(config.get('serverSleep', 'enabledmodules'))
         self.plugins = []
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
         for enabledmodule in self.enabledmodules:
             module = importlib.import_module("server_sleep_coreplugins.coreplugins." + enabledmodule, enabledmodule)
             plugin = getattr(module, enabledmodule)()
             if isinstance(plugin, PluginInterface.AbstractCheckPlugin):
                 self.plugins.append(plugin)
-                self.logger.log("Module loaded: " + enabledmodule, 3, True)
+                self.logger.info("Module loaded: " + enabledmodule)
             else:
-                self.logger.log("Loaded Module appears to be no CheckPlugin: " + enabledmodule, 1, True)
+                self.logger.warning("Loaded Module appears to be no CheckPlugin: " + enabledmodule)
 
     def __del__(self):
         pass
 
     def startup(self):
         while True:
-            self.logger.log("Wait " + str(self.checkinterval) + " seconds...")
+            self.logger.info("Wait " + str(self.checkinterval) + " seconds...")
             time.sleep(self.checkinterval)
 
             result = True
 
-            self.logger.log("Checks started")
+            self.logger.info("Checks started")
             status = None
             for plugin in self.plugins:
                 pluginName = plugin.__class__.__name__
@@ -50,13 +50,12 @@ class serverSleep(object):
                     result = True
                     break
                 elif status == -1:
-                    self.logger.log(pluginName + " failed!", 1)
+                    self.logger.error(pluginName + " failed!", 1)
 
             if not result:
                 continue
 
-            self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
-            self.logger.log("Calling pre-sleep hooks on plugins!", 3, True)
+            self.logger.info("All Checks OK: Going to Sleep Now!")
             for plugin in self.plugins:
                 try:
                     plugin.sleep()
@@ -65,8 +64,7 @@ class serverSleep(object):
 
             os.system(self.sleepcmd);
 
-            self.logger.log("Sleep is over: Server woke up!", 3, True)
-            self.logger.log("Calling wakeup hooks on plugins!", 3, True)
+            self.logger.info("Sleep is over: Server woke up!")
             for plugin in self.plugins:
                 try:
                     plugin.wake()
