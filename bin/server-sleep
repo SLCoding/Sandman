@@ -24,8 +24,7 @@ Get more information at: https://github.com/SLCoding/server-sleep
 import os, sys
 import getopt
 
-#sys.path.append("classes/")
-from serversleep.log import log
+import logging
 from serversleep.serverSleep import serverSleep
 
 
@@ -42,6 +41,7 @@ def main(argv=None):
                         [-c] [--configure]
                         [-l] [--log]
     """
+    logger = logging.getLogger(__name__)
     if not os.geteuid() == 0:
         sys.exit("Only root can run this script")
 
@@ -65,9 +65,9 @@ def main(argv=None):
 
             elif option in ("-s", "--start"):
                 instance = serverSleep()
-                instance.logger.log("server-sleep started", 3, True)
+                logger.info("server-sleep started")
                 instance.startup()
-                instance.logger.log("server-sleep terminated", 3, True)
+                logger.info("server-sleep terminated")
                 break
 
             elif option in ("-c", "--configure"):
