@@ -1,3 +1,11 @@
+**Build status**
+
+master:
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=master)](https://travis-ci.org/SLCoding/server-sleep)
+develop:
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=develop)](https://travis-ci.org/SLCoding/server-sleep)
+
+TODO: Rewrite this!
 Please Wait!
 ============
 This project is not ready yet! If you want to use it, please wait until its ready. At this moment you won't have much fun with this dev version.
@@ -42,8 +50,4 @@ If you've got some good idea to improve this project let us know o,r fork it and
 
 License
 =======
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
+[See License](LICENSE)
