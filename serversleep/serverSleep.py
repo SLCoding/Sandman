@@ -56,5 +56,20 @@ class serverSleep(object):
                 continue
 
             self.logger.log("All Checks OK: Going to Sleep Now!", 3, True)
+            self.logger.log("Calling pre-sleep hooks on plugins!", 3, True)
+            for plugin in self.plugins:
+                try:
+                    plugin.sleep()
+                except NotImplementedError:
+                    pass
+
             os.system(self.sleepcmd);
+
             self.logger.log("Sleep is over: Server woke up!", 3, True)
+            self.logger.log("Calling wakeup hooks on plugins!", 3, True)
+            for plugin in self.plugins:
+                try:
+                    plugin.wake()
+                except NotImplementedError:
+                    pass
+
