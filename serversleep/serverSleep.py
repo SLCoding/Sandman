@@ -5,7 +5,7 @@ import importlib
 
 import configparser
 import logging
-from server_sleep_api import PluginInterface
+from serversleep.api import PluginInterface
 
 
 class serverSleep(object):
@@ -20,7 +20,7 @@ class serverSleep(object):
         self.logger = logging.getLogger(__name__)
 
         for enabledmodule in self.enabledmodules:
-            module = importlib.import_module("server_sleep_coreplugins.coreplugins." + enabledmodule, enabledmodule)
+            module = importlib.import_module("serversleep.coreplugins." + enabledmodule, enabledmodule)
             plugin = getattr(module, enabledmodule)()
             if isinstance(plugin, PluginInterface.AbstractCheckPlugin):
                 self.plugins.append(plugin)
