@@ -1,9 +1,5 @@
-**Build status**
-
-master:
 [![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=master)](https://travis-ci.org/SLCoding/server-sleep)
-develop:
-[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=develop)](https://travis-ci.org/SLCoding/server-sleep)
+[![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg?branch=master)](https://coveralls.io/github/SLCoding/server-sleep)
 
 TODO: Rewrite this!
 Please Wait!
