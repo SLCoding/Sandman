@@ -6,7 +6,7 @@ import configparser
 import subprocess
 
 import logging
-from server_sleep_api import PluginInterface
+from serversleep.api import PluginInterface
 
 
 class pingcheck(PluginInterface.AbstractCheckPlugin):

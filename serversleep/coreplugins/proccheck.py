@@ -4,7 +4,7 @@
 import sys, os, signal, subprocess, re
 import configparser
 import logging
-from server_sleep_api import PluginInterface
+from serversleep.api import PluginInterface
 
 class proccheck(PluginInterface.AbstractCheckPlugin):
     """

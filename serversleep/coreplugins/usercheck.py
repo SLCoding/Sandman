@@ -5,7 +5,7 @@ import sys, os, re
 import subprocess
 import configparser
 import logging
-from server_sleep_api import PluginInterface
+from serversleep.api import PluginInterface
 
 class usercheck(PluginInterface.AbstractCheckPlugin):
     """
