@@ -38,7 +38,7 @@ Write what your check do here!
             self.logger.info("Proccheck: Ready for sleep!")
             return 0
         except:
-            self.logger.error("Proccheck: An unexpected error occured!", 1)
+            self.logger.error("Proccheck: An unexpected error occured!")
             return -1
 
     @staticmethod

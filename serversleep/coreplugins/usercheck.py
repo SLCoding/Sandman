@@ -103,7 +103,7 @@ check for users which are logged in
             if ((self.max_usr < user and self.max_usr >= 0) or (
                             self.max_usr_local < local_user and self.max_usr_local >= 0) or (
                             self.max_usr_remote < remote_user and self.max_usr_remote >= 0)):
-                self.logger.info("User: Not Ready for sleep! More users active than allowed!", 2)
+                self.logger.info("User: Not Ready for sleep! More users active than allowed!")
                 return 1
 
             self.logger.info("User: Ready for sleep!")

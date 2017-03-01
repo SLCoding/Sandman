@@ -50,7 +50,7 @@ class serverSleep(object):
                     result = True
                     break
                 elif status == -1:
-                    self.logger.error(plugin_name + " failed!", 1)
+                    self.logger.error(plugin_name + " failed!")
 
             if not result:
                 continue
@@ -70,5 +70,5 @@ class serverSleep(object):
                 try:
                     plugin.post_sleep()
                 except NotImplementedError:
-                    self.logger.debug("pre_sleep() not implemented in Plugin: " + plugin_name)
+                    self.logger.debug("post_sleep() not implemented in Plugin: " + plugin_name)
 
