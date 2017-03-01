@@ -57,8 +57,7 @@ Check if Plex had any connections or streams in a configurable time
         instance.logger.info("Plexcheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         # add the configfile option you used here also
         # configurable.append([sectionname, optionname, defaultvalue, description])

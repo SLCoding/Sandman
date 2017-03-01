@@ -49,7 +49,7 @@ check if pyLoad is currently downloading
         return instance.check()
 
     @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(["pyloadcheck", "path", "/usr/bin/", "path where the pyLoad binaries are stored"])
         return configurable

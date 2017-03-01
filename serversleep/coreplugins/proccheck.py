@@ -47,8 +47,7 @@ Write what your check do here!
         instance.logger.info("Proccheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         # add the configfile option you used here also
         # configurable.append([sectionname, optionname, defaultvalue, description])

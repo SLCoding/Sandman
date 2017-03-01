@@ -117,8 +117,7 @@ check for users which are logged in
         instance.logger.info("Usercheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(
             ["usercheck", "max_usr", '0', "amount of users logged in. nevertheless it's going to sleep | -1 = disable"])

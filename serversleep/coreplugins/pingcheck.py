@@ -55,8 +55,7 @@ check for computers in your network which are running
         logger.info("Pingcheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(
             ["pingcheck", "hostlist", '("hostname","192.168.0.1")', "list of ip-addresses or hostnames to check"])
