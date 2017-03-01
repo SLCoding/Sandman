@@ -58,7 +58,7 @@ class serverSleep(object):
             self.logger.info("All Checks OK: Going to Sleep Now!")
             for plugin in self.plugins:
                 try:
-                    plugin.sleep()
+                    plugin.pre_sleep()
                 except NotImplementedError:
                     pass
 
@@ -67,7 +67,7 @@ class serverSleep(object):
             self.logger.info("Sleep is over: Server woke up!")
             for plugin in self.plugins:
                 try:
-                    plugin.wake()
+                    plugin.post_sleep()
                 except NotImplementedError:
                     pass
 
