@@ -7,11 +7,11 @@ setup(name='server-sleep',
       author='SourceLan',
       author_email='daniel.wiesendorf@googlemail.com, schuette.marcus@googlemail.com',
       license='MIT',
-      packages=['serversleep'],
+      packages=['serversleep',
+                'serversleep.api',
+                'serversleep.coreplugins'],
       scripts=['bin/server-sleep'],
       install_requires=[
-          'server-sleep-api',
-          'server-sleep-coreplugins',
           'configparser'
       ],
       zip_safe=False)
