@@ -10,8 +10,7 @@ setup(name='server-sleep',
       packages=['serversleep'],
       scripts=['bin/server-sleep'],
       install_requires=[
-          'server-sleep-api',
-          'server-sleep-coreplugins',
-          'configparser'
+          'configparser',
+          'localconfig'
       ],
       zip_safe=False)
