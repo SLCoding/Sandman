@@ -5,6 +5,3 @@ def inc(x):
 
 def test_good():
     assert inc(3) == 4
-
-def test_bad():
-    assert inc(3) == 5
