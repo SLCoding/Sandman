@@ -41,7 +41,7 @@ class serverSleep(object):
             self.logger.info("Checks started")
             status = None
             for plugin in self.plugins:
-                pluginName = plugin.__class__.__name__
+                plugin_name = plugin.__class__.__name__
                 status = plugin.check()
 
                 if status == 1:
@@ -50,17 +50,18 @@ class serverSleep(object):
                     result = True
                     break
                 elif status == -1:
-                    self.logger.error(pluginName + " failed!", 1)
+                    self.logger.error(plugin_name + " failed!", 1)
 
             if not result:
                 continue
 
             self.logger.info("All Checks OK: Going to Sleep Now!")
             for plugin in self.plugins:
+                plugin_name = plugin.__class__.__name__
                 try:
                     plugin.pre_sleep()
                 except NotImplementedError:
-                    pass
+                    self.logger.debug("pre_sleep() not implemented in Plugin: " + plugin_name)
 
             os.system(self.sleepcmd);
 
@@ -69,5 +70,5 @@ class serverSleep(object):
                 try:
                     plugin.post_sleep()
                 except NotImplementedError:
-                    pass
+                    self.logger.debug("pre_sleep() not implemented in Plugin: " + plugin_name)
 
