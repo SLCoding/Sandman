@@ -1,53 +1,46 @@
-**Build status**
+### Work In Progress Disclaimer
 
-master:
-[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=master)](https://travis-ci.org/SLCoding/server-sleep)
-develop:
-[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg?branch=develop)](https://travis-ci.org/SLCoding/server-sleep)
+This project is not ready yet! In fact we just rebooted this project. And this time we do it right! Right?
+If you want to use it, do yourself a favor and wait until it's ready. At this moment you won't have much fun with this dev, pre alpha aka. not working correctly(but on my machine it did) right now version. ;-)
 
-TODO: Rewrite this!
-Please Wait!
-============
-This project is not ready yet! If you want to use it, please wait until its ready. At this moment you won't have much fun with this dev version.
 
-server-sleep
-============
-server-sleep is a script that suspends your homeserver when it's not in use. This results in lower energy costs and extended hardware life.
+# server-sleep
+
+Build:
+
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg)](https://travis-ci.org/SLCoding/server-sleep)
+
+Code Quality:
+
+[![Code Climate](https://codeclimate.com/github/SLCoding/server-sleep/badges/gpa.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
+[![Issue Count](https://codeclimate.com/github/SLCoding/server-sleep/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
+[![Test Coverage](https://codeclimate.com/github/SLCoding/server-sleep/badges/coverage.svg)](https://codeclimate.com/github/SLCoding/server-sleep/coverage)
+[![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg)](https://coveralls.io/github/SLCoding/server-sleep)
+
+Dependencies:
+
+[![Requirements Status](https://requires.io/github/SLCoding/server-sleep/requirements.svg)](https://requires.io/github/SLCoding/server-sleep/requirements/)
+
+
+## Description
+
+server-sleep, you guessed it, puts your server to sleep when it's not in use.
+It's aimed towards home/media servers, but in theory you could it use for every linux box you don't want to run 24/7.
+This (hopefully) results in lower energy costs and extended hardware life.
+
 There are a bunch of conditions you can choose to check the state.
--	Are local or ssh users logged in?
--	Are computers in the network running?
--	Is pyLoad downloading?
--	Are processes running which shouldn't be interruptet?
-- 	...
+- Are local or ssh users logged in?
+- Are computers in the network running?
+- Are processes running which shouldn't be interrupted?
+- ... or what ever you want server-sleep to check. Check out our PluginInterface.
 
-You can choose which of these conditions will be checked.
 
-Installation
-============
-Its tested on Ubuntu 12.04 and Debian Squeeze.
+## Wanna help us out?
 
-Requirements
-------------
-The installation script will check for requirements. We recommend to install all to enable the full range of features
--	python	(Hey, its written in python… you need it!)
--	...
+If you've got some good ideas to improve this project [let us know](https://github.com/SLCoding/server-sleep-coreplugins/issues/new) or send a PR.
+We don't want you to buy us beer. If you like this project, spread the word.
 
-Using the install script
-------------------------
--	Download the last stable version or make a clone of this repo
--	run the install.sh as root
--	now configure it by editing / or running "server-sleep --configure"
--	reboot or run "sudo /etc/init.d/server-sleep start"
 
-Hand made installation
-----------------------
--	also not ready yet...
+## License
 
-Why we developed this
-=====================
-We coded this for our personal needs. Some members of our team have home servers and don't want them to run 24/7. So, we did this. ;-)
-If you've got some good idea to improve this project let us know o,r fork it and code it by yourself. Who knows, maybe your idea is awesome enough for us to include it in our awesome project. ;)
-
-License
-=======
 [See License](LICENSE)
