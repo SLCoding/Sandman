@@ -1,15 +1,3 @@
-Build:
-[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg)](https://travis-ci.org/SLCoding/server-sleep)
-
-Code Quality:
-[![Code Climate](https://codeclimate.com/github/SLCoding/server-sleep/badges/gpa.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
-[![Issue Count](https://codeclimate.com/github/SLCoding/server-sleep/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
-[![Test Coverage](https://codeclimate.com/github/SLCoding/server-sleep/badges/coverage.svg)](https://codeclimate.com/github/SLCoding/server-sleep/coverage)
-[![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg)](https://coveralls.io/github/SLCoding/server-sleep)
-
-
-[![Requirements Status](https://requires.io/github/SLCoding/server-sleep/requirements.svg)](https://requires.io/github/SLCoding/server-sleep/requirements/)
-
 ## Work in Progress Disclaimer
 
 This project is not ready yet! In fact we just rebooted this project. And this time we do it right! Right?
@@ -17,6 +5,20 @@ If you want to use it, do yourself a favor and wait until it's ready. At this mo
 
 
 # server-sleep
+*Build:*
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg)](https://travis-ci.org/SLCoding/server-sleep)
+
+*Code Quality:*
+[![Code Climate](https://codeclimate.com/github/SLCoding/server-sleep/badges/gpa.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
+[![Issue Count](https://codeclimate.com/github/SLCoding/server-sleep/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
+[![Test Coverage](https://codeclimate.com/github/SLCoding/server-sleep/badges/coverage.svg)](https://codeclimate.com/github/SLCoding/server-sleep/coverage)
+
+[![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg)](https://coveralls.io/github/SLCoding/server-sleep)
+
+*Dependencies:*
+[![Requirements Status](https://requires.io/github/SLCoding/server-sleep/requirements.svg)](https://requires.io/github/SLCoding/server-sleep/requirements/)
+
+## Description
 
 server-sleep, you guest it, puts your server to sleep when it's not in use.
 It's aimed towards home/media servers, but in theory you could it use for every linux box you don't want to run 24/7.

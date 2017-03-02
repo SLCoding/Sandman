@@ -17,4 +17,4 @@ install:
 script: pytest
 
 after_sucess:
-  - CODECLIMATE_REPO_TOKEN=<token> codeclimate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=d7835e0721127c0a775e29547c38c804071dec2c0f29ff9951fc47748376a1af codeclimate-test-reporter
