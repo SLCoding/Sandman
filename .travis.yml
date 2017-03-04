@@ -10,11 +10,20 @@ python:
   - "pypy3" # Pypy3 2.4.0
   - "pypy-5.3.1"
 
+addons:
+  sonarqube:
+    token:
+      secure: $SONAR_TOKEN
+    github_token:
+      secure: $GITHUB_TOKEN
+
 install:
   - pip install .
   - pip install -r requirements.txt
 
-script: pytest
+script:
+  - pytest
+  - sonar-scanner
 
 after_sucess:
-  - CODECLIMATE_REPO_TOKEN=d7835e0721127c0a775e29547c38c804071dec2c0f29ff9951fc47748376a1af codeclimate-test-reporter
+  - codeclimate-test-reporter
