@@ -5,7 +5,7 @@ import importlib
 
 import configparser
 import logging
-from server_sleep_api import PluginInterface
+from serversleep.api import PluginInterface
 
 
 class serverSleep(object):
@@ -20,7 +20,7 @@ class serverSleep(object):
         self.logger = logging.getLogger(__name__)
 
         for enabledmodule in self.enabledmodules:
-            module = importlib.import_module("server_sleep_coreplugins.coreplugins." + enabledmodule, enabledmodule)
+            module = importlib.import_module("serversleep.coreplugins." + enabledmodule, enabledmodule)
             plugin = getattr(module, enabledmodule)()
             if isinstance(plugin, PluginInterface.AbstractCheckPlugin):
                 self.plugins.append(plugin)
@@ -41,7 +41,7 @@ class serverSleep(object):
             self.logger.info("Checks started")
             status = None
             for plugin in self.plugins:
-                pluginName = plugin.__class__.__name__
+                plugin_name = plugin.__class__.__name__
                 status = plugin.check()
 
                 if status == 1:
@@ -50,24 +50,25 @@ class serverSleep(object):
                     result = True
                     break
                 elif status == -1:
-                    self.logger.error(pluginName + " failed!", 1)
+                    self.logger.error(plugin_name + " failed!")
 
             if not result:
                 continue
 
             self.logger.info("All Checks OK: Going to Sleep Now!")
             for plugin in self.plugins:
+                plugin_name = plugin.__class__.__name__
                 try:
-                    plugin.sleep()
+                    plugin.pre_sleep()
                 except NotImplementedError:
-                    pass
+                    self.logger.debug("pre_sleep() not implemented in Plugin: " + plugin_name)
 
             os.system(self.sleepcmd);
 
             self.logger.info("Sleep is over: Server woke up!")
             for plugin in self.plugins:
                 try:
-                    plugin.wake()
+                    plugin.post_sleep()
                 except NotImplementedError:
-                    pass
+                    self.logger.debug("post_sleep() not implemented in Plugin: " + plugin_name)
 
