@@ -11,12 +11,6 @@ python:
  # - "pypy3" # Pypy3 2.4.0
   - "pypy-5.3.1"
 
-addons:
-  sonarqube:
-    token:
-      secure: $SONAR_TOKEN
-    github_token:
-      secure: $GITHUB_TOKEN
 
 install:
   - pip install .
