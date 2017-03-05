@@ -13,12 +13,12 @@ This (hopefully) results in lower energy costs and extended hardware life.
 [![GitHub issues](https://img.shields.io/github/issues/SLCoding/server-sleep.svg)](https://github.com/SLCoding/server-sleep/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SLCoding/server-sleep.svg)](https://github.com/SLCoding/server-sleep/network)
 [![GitHub stars](https://img.shields.io/github/stars/SLCoding/server-sleep.svg)](https://github.com/SLCoding/server-sleep/stargazers)
-[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg)](https://travis-ci.org/SLCoding/server-sleep)
 
+[![Build Status](https://travis-ci.org/SLCoding/server-sleep.svg)](https://travis-ci.org/SLCoding/server-sleep)
 
 [![Code Climate](https://codeclimate.com/github/SLCoding/server-sleep/badges/gpa.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
 [![Issue Count](https://codeclimate.com/github/SLCoding/server-sleep/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
-[![Test Coverage](https://codeclimate.com/github/SLCoding/server-sleep/badges/coverage.svg)](https://codeclimate.com/github/SLCoding/server-sleep/coverage)
+
 [![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg)](https://coveralls.io/github/SLCoding/server-sleep)
 
 [![Requirements Status](https://requires.io/github/SLCoding/server-sleep/requirements.svg)](https://requires.io/github/SLCoding/server-sleep/requirements/)
