@@ -1,3 +1,5 @@
+dist: trusty
+
 language: python
 python:
   - "2.6"
@@ -6,15 +8,32 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-  - "pypy"  # PyPy2 2.5.0
-  - "pypy3" # Pypy3 2.4.0
+ # - "pypy"  # PyPy2 2.5.0
+ # - "pypy3" # Pypy3 2.4.0
   - "pypy-5.3.1"
+
+addons:
+  sonarqube:
+    branches:
+      - develop
 
 install:
   - pip install .
+  - pip install codecov
+  - pip install coveralls
   - pip install -r requirements.txt
 
-script: pytest
+script:
+  - coverage run --source=serversleep setup.py test
+  - sonar-scanner
 
 after_sucess:
-  - CODECLIMATE_REPO_TOKEN=d7835e0721127c0a775e29547c38c804071dec2c0f29ff9951fc47748376a1af codeclimate-test-reporter
+  - codecov
+  - coveralls
+
+deploy:
+  provider: pypi
+  user: $PYPI_USER
+  password: $PYPI_PASS
+  on:
+    tags: true
