@@ -19,6 +19,7 @@ addons:
 
 install:
   - pip install .
+  - pip install codecov
   - pip install coveralls
   - pip install -r requirements.txt
 
@@ -27,6 +28,7 @@ script:
   - sonar-scanner
 
 after_sucess:
+  - codecov
   - coveralls
 
 deploy:

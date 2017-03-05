@@ -20,6 +20,7 @@ This (hopefully) results in lower energy costs and extended hardware life.
 [![Issue Count](https://codeclimate.com/github/SLCoding/server-sleep/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/server-sleep)
 
 [![Coverage Status](https://coveralls.io/repos/github/SLCoding/server-sleep/badge.svg)](https://coveralls.io/github/SLCoding/server-sleep)
+[![codecov](https://codecov.io/gh/SLCoding/server-sleep/branch/master/graph/badge.svg)](https://codecov.io/gh/SLCoding/server-sleep)
 
 [![Requirements Status](https://requires.io/github/SLCoding/server-sleep/requirements.svg)](https://requires.io/github/SLCoding/server-sleep/requirements/)
 
