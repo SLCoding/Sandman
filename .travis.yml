@@ -18,6 +18,8 @@ addons:
       secure: $SONAR_TOKEN
     github_token:
       secure: $GITHUB_TOKEN
+    branches :
+      - develop
 
 install:
   - pip install .
