@@ -1,4 +1,5 @@
 dist: trusty
+
 language: python
 python:
   - "2.6"
@@ -20,11 +21,14 @@ addons:
 
 install:
   - pip install .
+  - pip install coveralls
+  - pip install codeclimate-test-reporter
   - pip install -r requirements.txt
 
 script:
-  - pytest
+  - coverage run setup.py test
   - sonar-scanner
 
 after_sucess:
+  - coveralls
   - codeclimate-test-reporter
