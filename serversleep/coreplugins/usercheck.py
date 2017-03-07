@@ -51,8 +51,8 @@ check for users which are logged in
                         "max_usr_local",
                         "Maximum locally logged in users",
                         "2",
-                        "Specify the maximum number of local users that should be"
-                                + " ignored when putting the Server to sleep."
+                        """Specify the maximum number of local users that should be
+                        ignored when putting the Server to sleep."""
                 ),
                 Configurable(
                         "max_usr_remote",
