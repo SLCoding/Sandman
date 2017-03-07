@@ -37,7 +37,7 @@ class CheckReturn(Enum):
 
 class Configurable(object):
 
-    def ___init___(self, identifier, displayname, examplevalue, description):
+    def __init__(self, identifier, displayname, examplevalue, description):
         self.identifier = identifier
         self.display_name = displayname
         self.example_value = examplevalue
