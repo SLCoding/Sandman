@@ -18,12 +18,10 @@ check for computers in your network which are running
         super(Pingcheck, self).__init__()
 
         # Read Configfile
-        #config = configparser.ConfigParser()
-        #config.read('../serversleep/checkmodules/pingcheck.cfg')
-        # self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
-        self.hostlist = ("127.0.0.1")
-        # self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
-        self.max_hosts = 0
+        config = configparser.ConfigParser()
+        config.read('../serversleep/checkmodules/pingcheck.cfg')
+        self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
+        self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
         self.logger = logging.getLogger(__name__)
 
     def __del__(self):
@@ -75,17 +73,9 @@ check for computers in your network which are running
     def wake(self):
         pass
 
-# if __name__ == "__main__" and __package__ is None:
-#     from sys import path
-#     from os.path import dirname as dir
-#
-#     path.append(dir(path[0]))
-#     __package__ = "api"
-
-
 # for testing purpose
-#if __name__ == '__main__':
-#    os.chdir('../')
-#    print(Pingcheck.run())
-#    print(Pingcheck.configure())
-#    print(Pingcheck.__doc__)
+if __name__ == '__main__':
+   os.chdir('../')
+   print(Pingcheck.run())
+   print(Pingcheck.configure())
+   print(Pingcheck.__doc__)

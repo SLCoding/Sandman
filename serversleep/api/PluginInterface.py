@@ -14,9 +14,7 @@ class AbstractCheckPlugin(ABC):
     def check(self):
         pass
 
-    # TODO should optional methods as "hooks" raising an exeption?
-
-    """Hock before the check starts"""
+    """Hook before the check starts"""
     def pre_check(self):
         raise NotImplementedError
 
@@ -32,14 +30,12 @@ class AbstractCheckPlugin(ABC):
     def post_sleep(self):
         raise NotImplementedError
 
-    # TODO maybe return an Configuration Object, see CheckResult.py?
     """Returns a list of configurable values for the plugin"""
     @abstractmethod
     def configurables(self):
         pass
 
 
-# TODO move in separate file
 class CheckReturn(Enum):
     SLEEP_READY = 1
     DONT_SLEEP = 2
@@ -47,7 +43,6 @@ class CheckReturn(Enum):
     UNKNOWN = 9
 
 
-# TODO I don't get it. Please write a comment explaining this
 class Configurable(object):
 
     def ___init___(self, identifier, displayname, examplevalue, description):
