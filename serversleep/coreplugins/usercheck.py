@@ -40,25 +40,34 @@ check for users which are logged in
         return CheckReturn.SLEEP_READY
 
     def configurables(self):
-        configurables = [Configurable("max_usr",
-                                      "Maximum logged in users",
-                                      "5",
-                                      "Specify the maximum number of users that should be ignored"
-                                      " when putting the Server to sleep."),
-                         Configurable("max_usr_local",
-                                      "Maximum locally logged in users",
-                                      "2",
-                                      "Specify the maximum number of local users that should be"
-                                      " ignored when putting the Server to sleep."),
-                         Configurable("max_usr_remote",
-                                      "Maximum remote logged in users ",
-                                      "1",
-                                      "Specify the maximum number of remote users that should be"
-                                      " ignored when putting the Server to sleep."),
-                         Configurable("idle_timeout",
-                                      "User Idle timeout",
-                                      "3600",
-                                      "Specify the idle timeout for user sessions.")]
+        configurables = [
+                Configurable(
+                        "max_usr",
+                        "Maximum logged in users",
+                        "5",
+                        "Specify the maximum number of users that should be ignored when putting the Server to sleep."
+                ),
+                Configurable(
+                        "max_usr_local",
+                        "Maximum locally logged in users",
+                        "2",
+                        "Specify the maximum number of local users that should be"
+                                + " ignored when putting the Server to sleep."
+                ),
+                Configurable(
+                        "max_usr_remote",
+                        "Maximum remote logged in users ",
+                        "1",
+                        "Specify the maximum number of remote users that should be"
+                                + " ignored when putting the Server to sleep."
+                ),
+                Configurable(
+                        "idle_timeout",
+                        "User Idle timeout",
+                        "3600",
+                        "Specify the idle timeout for user sessions."
+                )
+        ]
 
         return configurables
 
