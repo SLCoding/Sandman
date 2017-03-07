@@ -15,7 +15,8 @@ setup(name='server-sleep',
         'bin/server-sleep'],
     install_requires=[
         'configparser',
-        'localconfig'
+        'localconfig',
+        'psutil'
     ],
     setup_requires=[
         'pytest-runner'],
