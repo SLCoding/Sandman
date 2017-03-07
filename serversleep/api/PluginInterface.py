@@ -14,15 +14,23 @@ class AbstractCheckPlugin(ABC):
     def check(self):
         pass
 
-    """Perform tasks that should be done before the device is set to sleep"""
+    """Hook before the check starts"""
+    def pre_check(self):
+        raise NotImplementedError
+
+    """Hook after the check is finished"""
+    def post_check(self):
+        raise NotImplementedError
+
+    """Hook before device is going to sleep"""
     def pre_sleep(self):
         raise NotImplementedError
 
-    """Perform tasks that should be done after wake up"""
+    """Hook after the device is woken up"""
     def post_sleep(self):
         raise NotImplementedError
 
-    """Return a list of Configurable values for the Plugin"""
+    """Returns a list of configurable values for the plugin"""
     @abstractmethod
     def configurables(self):
         pass

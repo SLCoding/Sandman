@@ -1,20 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import configparser
+#import os
+#import configparser
 import subprocess
 
 import logging
 from serversleep.api import PluginInterface
 
 
-class pingcheck(PluginInterface.AbstractCheckPlugin):
+class Pingcheck(PluginInterface.AbstractCheckPlugin):
     """
 check for computers in your network which are running
     """
 
     def __init__(self):
+        super(Pingcheck, self).__init__()
+
         # Read Configfile
         config = configparser.ConfigParser()
         config.read('../serversleep/checkmodules/pingcheck.cfg')
@@ -27,13 +29,14 @@ check for computers in your network which are running
 
     def check(self):
         try:
-            count = 0;
+            count = 0
             for host in self.hostlist:
-                ret = subprocess.call("ping -c 2 %s" % host,
-                                      shell=True,
-                                      stdout=open('/dev/null', 'w'),
-                                      stderr=subprocess.STDOUT
-                                      )
+                ret = subprocess.call(
+                    "ping -c 2 %s" % host,
+                    shell=True,
+                    stdout=open('/dev/null', 'w'),
+                    stderr=subprocess.STDOUT)
+
                 if ret == 0:
                     self.logger.info("Pingcheck: Host " + host + " is up!")
                     count += 1
@@ -51,12 +54,13 @@ check for computers in your network which are running
     @staticmethod
     def run():
         logger = logging.getLogger(__name__)
-        instance = pingcheck()
+        instance = Pingcheck()
         logger.info("Pingcheck: check started")
         return instance.check()
 
+    @staticmethod
     def configurables(self):
-        configurable = []
+
         configurable.append(
             ["pingcheck", "hostlist", '("hostname","192.168.0.1")', "list of ip-addresses or hostnames to check"])
         configurable.append(["pingcheck", "max_hosts", '0',
@@ -71,7 +75,7 @@ check for computers in your network which are running
 
 # for testing purpose
 if __name__ == '__main__':
-    os.chdir('../')
-    print(pingcheck.run())
-    print(pingcheck.configure())
-    print(pingcheck.__doc__)
+   os.chdir('../')
+   print(Pingcheck.run())
+   print(Pingcheck.configure())
+   print(Pingcheck.__doc__)
