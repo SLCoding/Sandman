@@ -3,9 +3,8 @@
 
 import sys, os, signal, subprocess, re
 import configparser
-
-from serversleep.log import log
-from server_sleep_api import PluginInterface
+import logging
+from serversleep.api import PluginInterface
 
 class proccheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -20,7 +19,7 @@ Write what your check do here!
         # add your options here like this:
         self.procs = eval(config.get('proccheck', 'procs'), {}, {})
 
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         pass
@@ -32,24 +31,23 @@ Write what your check do here!
                 for proc in self.procs:
                     pass
                     if re.search(proc, process):
-                        self.logger.log("Proccheck: Process found '" + proc + "'!")
-                        self.logger.log("Proccheck: Not ready for sleep!")
+                        self.logger.info("Proccheck: Process found '" + proc + "'!")
+                        self.logger.info("Proccheck: Not ready for sleep!")
                         return 1
 
-            self.logger.log("Proccheck: Ready for sleep!")
+            self.logger.info("Proccheck: Ready for sleep!")
             return 0
         except:
-            self.logger.log("Proccheck: An unexpected error occured!", 1)
+            self.logger.error("Proccheck: An unexpected error occured!")
             return -1
 
     @staticmethod
     def run():
         instance = proccheck()
-        instance.logger.log("Proccheck: check started")
+        instance.logger.info("Proccheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         # add the configfile option you used here also
         # configurable.append([sectionname, optionname, defaultvalue, description])

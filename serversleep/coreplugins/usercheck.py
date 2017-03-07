@@ -4,9 +4,8 @@
 import sys, os, re
 import subprocess
 import configparser
-
-from serversleep.log import log
-from server_sleep_api import PluginInterface
+import logging
+from serversleep.api import PluginInterface
 
 class usercheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -21,7 +20,7 @@ check for users which are logged in
         self.max_usr_local = int(config.get('usercheck', 'max_usr_local'))
         self.max_usr_remote = int(config.get('usercheck', 'max_usr_remote'))
         self.idle_timeout = int(config.get('usercheck', 'idle_timeout'))
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         pass
@@ -44,7 +43,7 @@ check for users which are logged in
             for line in output.split("\n"):
 
                 if (line != "" and line != None):
-                    self.logger.log("Proccessing User " + str(i))
+                    self.logger.info("Proccessing User " + str(i))
                     fields = line.split()
 
                     if (len(fields) < 5):
@@ -76,10 +75,10 @@ check for users which are logged in
                         minutes = int(idle[0])
                         seconds = int(idle[1])
                     else:
-                        self.logger.log("User " + str(i) + " Idle time couldn't be parsed!", 2)
+                        self.logger.warning("User " + str(i) + " Idle time couldn't be parsed!")
 
                     idle_time = (hours * 60 + minutes) * 60 + seconds
-                    self.logger.log("User " + str(i) + " Idle Time = " + str(idle_time) + " secs")
+                    self.logger.info("User " + str(i) + " Idle Time = " + str(idle_time) + " secs")
                     local = False
 
                     if (re.match("^\:.*$", location)):
@@ -88,26 +87,26 @@ check for users which are logged in
                     if (idle_time < self.idle_timeout or self.idle_timeout < 0):
                         user += 1
                         if (local):
-                            self.logger.log("User " + str(i) + " Location: Local")
+                            self.logger.info("User " + str(i) + " Location: Local")
                             local_user += 1
                         else:
-                            self.logger.log("User " + str(i) + " Location: Remote")
+                            self.logger.info("User " + str(i) + " Location: Remote")
                             remote_user += 1
                     i += 1
 
-            self.logger.log("Users: " + str(i))
-            self.logger.log("Active: " + str(user))
-            self.logger.log("Inactive: " + str(i - user))
-            self.logger.log("Local: " + str(local_user))
-            self.logger.log("Remote: " + str(remote_user))
+            self.logger.info("Users: " + str(i))
+            self.logger.info("Active: " + str(user))
+            self.logger.info("Inactive: " + str(i - user))
+            self.logger.info("Local: " + str(local_user))
+            self.logger.info("Remote: " + str(remote_user))
 
             if ((self.max_usr < user and self.max_usr >= 0) or (
-                    self.max_usr_local < local_user and self.max_usr_local >= 0) or (
-                    self.max_usr_remote < remote_user and self.max_usr_remote >= 0)):
-                self.logger.log("User: Not Ready for sleep! More users active than allowed!", 2)
+                            self.max_usr_local < local_user and self.max_usr_local >= 0) or (
+                            self.max_usr_remote < remote_user and self.max_usr_remote >= 0)):
+                self.logger.info("User: Not Ready for sleep! More users active than allowed!")
                 return 1
 
-            self.logger.log("User: Ready for sleep!")
+            self.logger.info("User: Ready for sleep!")
             return 0
         except:
             return -1
@@ -115,11 +114,10 @@ check for users which are logged in
     @staticmethod
     def run():
         instance = usercheck()
-        instance.logger.log("Usercheck: check started")
+        instance.logger.info("Usercheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(
             ["usercheck", "max_usr", '0', "amount of users logged in. nevertheless it's going to sleep | -1 = disable"])
@@ -132,10 +130,10 @@ check for users which are logged in
         return configurable
 
     def sleep(self):
-        pass
+        self.logger.log("Usercheck Sleep Hook")
 
     def wake(self):
-        pass
+        self.logger.log("Usercheck Wake Hook")
 
 # for testing purpose
 if __name__ == '__main__':

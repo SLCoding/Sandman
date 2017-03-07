@@ -4,9 +4,8 @@
 import sys
 import configparser
 import subprocess
-
-from serversleep.log import log
-from server_sleep_api import PluginInterface
+import logging
+from serversleep.api import PluginInterface
 
 class pyloadcheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -18,7 +17,7 @@ check if pyLoad is currently downloading
         config = configparser.ConfigParser()
         config.read('../serversleep/checkmodules/pyloadcheck.cfg')
         self.path = str(config.get('pyloadcheck', 'path'))
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         pass
@@ -35,10 +34,10 @@ check if pyLoad is currently downloading
             ps.wait()
             for Expr in CheckExprs:
                 if (re.match(CheckString, output)):
-                    self.log("pyLoadCheck: Ready for sleep! PyLoad is idle.")
+                    self.logger.info("pyLoadCheck: Ready for sleep! PyLoad is idle.")
                     return 0
 
-            self.log("pyLoadCheck: Not Ready for sleep! PyLoad is working.")
+            self.logger.info("pyLoadCheck: Not Ready for sleep! PyLoad is working.")
             return 1
         except:
             return -1
@@ -46,11 +45,11 @@ check if pyLoad is currently downloading
     @staticmethod
     def run():
         instance = pyloadcheck()
-        instance.logger.log("pyLoad Check: check started")
+        instance.logger.info("pyLoad Check: check started")
         return instance.check()
 
     @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(["pyloadcheck", "path", "/usr/bin/", "path where the pyLoad binaries are stored"])
         return configurable

@@ -3,8 +3,8 @@
 
 import sys, os, signal, subprocess, re, datetime
 import configparser
-from serversleep.log import log
-from server_sleep_api import PluginInterface
+import logging
+from serversleep.api import PluginInterface
 
 class plexcheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -20,7 +20,7 @@ Check if Plex had any connections or streams in a configurable time
         self.conf_idletime = int(config.get('plexcheck', 'idletime'))
         self.conf_logfile = config.get('plexcheck', 'logfile')
         self.conf_format = config.get('plexcheck', 'timeformat')
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         pass
@@ -41,10 +41,10 @@ Check if Plex had any connections or streams in a configurable time
         date_idletime = datetime.timedelta(seconds=self.conf_idletime)
 
         if (date_now - date > date_idletime):
-            self.logger.log("Plexcheck: Ready for sleep!")
+            self.logger.info("Plexcheck: Ready for sleep!")
             return 0
 
-        self.logger.log("Plexcheck: Not ready for sleep!")
+        self.logger.info("Plexcheck: Not ready for sleep!")
         return 1
 
     # except:
@@ -54,11 +54,10 @@ Check if Plex had any connections or streams in a configurable time
     @staticmethod
     def run():
         instance = plexcheck()
-        instance.logger.log("Plexcheck: check started")
+        instance.logger.info("Plexcheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         # add the configfile option you used here also
         # configurable.append([sectionname, optionname, defaultvalue, description])

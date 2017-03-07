@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, os
+import os
 import configparser
 import subprocess
 
-from serversleep.log import log
-from server_sleep_api import PluginInterface
+import logging
+from serversleep.api import PluginInterface
 
 
 class pingcheck(PluginInterface.AbstractCheckPlugin):
@@ -20,7 +20,7 @@ check for computers in your network which are running
         config.read('../serversleep/checkmodules/pingcheck.cfg')
         self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
         self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
-        self.logger = log()
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         pass
@@ -35,27 +35,27 @@ check for computers in your network which are running
                                       stderr=subprocess.STDOUT
                                       )
                 if ret == 0:
-                    self.logger.log("Pingcheck: Host " + host + " is up!")
+                    self.logger.info("Pingcheck: Host " + host + " is up!")
                     count += 1
                     if count > self.max_hosts:
-                        self.logger.log("Pingcheck: Not Ready for sleep! More hosts active then allowed!", 2)
+                        self.logger.info("Pingcheck: Not Ready for sleep! More hosts active then allowed!")
                         return 1
                 else:
-                    self.logger.log("Pingcheck: Host " + host + " is down!")
+                    self.logger.info("Pingcheck: Host " + host + " is down!")
 
-            self.logger.log("Pingcheck: Ready for sleep!")
+            self.logger.info("Pingcheck: Ready for sleep!")
             return 0
         except:
             return -1
 
     @staticmethod
     def run():
+        logger = logging.getLogger(__name__)
         instance = pingcheck()
-        instance.logger.log("Pingcheck: check started")
+        logger.info("Pingcheck: check started")
         return instance.check()
 
-    @staticmethod
-    def configure():
+    def configurables(self):
         configurable = []
         configurable.append(
             ["pingcheck", "hostlist", '("hostname","192.168.0.1")', "list of ip-addresses or hostnames to check"])
