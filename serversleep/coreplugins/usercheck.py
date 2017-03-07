@@ -12,15 +12,10 @@ class UsercheckPlugin(AbstractCheckPlugin):
 check for users which are logged in
     """
 
-    def __init__(self, configuration, user_info_util = None):
+    def __init__(self, configuration, user_info_util=None):
         self.logger = logging.getLogger(__name__)
         self.configuration = configuration
-
-        if user_info_util == None:
-            self.user_info_util = UsercheckPlugin.get_user_info_util()
-        else:
-            self.user_info_util = user_info_util
-
+        self.user_info_util = psutil
         self.max_usr = self.configuration["max_usr"]
         self.max_usr_local = self.configuration["max_usr_local"]
         self.max_usr_remote = self.configuration["max_usr_remote"]
@@ -29,10 +24,6 @@ check for users which are logged in
 
     def __del__(self):
         pass
-
-    @staticmethod
-    def get_user_info_util():
-        return psutil
 
     def check(self):
         sessions = self._get_active_sessions()
