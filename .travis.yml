@@ -27,7 +27,7 @@ script:
   - coverage run --source=serversleep setup.py test
   - sonar-scanner
 
-after_sucess:
+after_success:
   - codecov
   - coveralls
 
