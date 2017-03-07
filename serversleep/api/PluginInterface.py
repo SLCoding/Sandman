@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, ABCMeta
 from enum import Enum
 
 
-class AbstractCheckPlugin(ABC):
-
+class AbstractCheckPlugin():
+    __metaclass__ = ABCMeta
     """Initialize your Plugin Class"""
     @abstractmethod
     def __init__(self):
