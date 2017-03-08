@@ -43,7 +43,8 @@ check for users which are logged in
         self.logger.info("Ready for sleep")
         return CheckReturn.SLEEP_READY
 
-    def configurables(self):
+    @staticmethod
+    def configurables():
         return [
                 Configurable(
                         "max_usr",

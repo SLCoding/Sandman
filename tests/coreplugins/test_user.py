@@ -24,8 +24,9 @@ class UserPluginTest(unittest.TestCase):
         self.assertEquals(user_check_plugin.max_usr_remote, 2)
         self.assertEquals(user_check_plugin.idle_timeout, 3600)
 
-    # def test_get_configurables(self):
-    #     user_check_plugin = UsercheckPlugin(self.configurations)
+    def test_get_configurables(self):
+        configurables = UsercheckPlugin.configurables()
+        self.assertEquals(len(configurables), 4)
 
     def test_returns_sleep_ready(self):
         user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
