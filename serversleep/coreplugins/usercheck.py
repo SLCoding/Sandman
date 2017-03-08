@@ -93,11 +93,3 @@ class UserInformationUtil:
 
     def _get_session_idle_time(self, session):
         pass
-
-
-# for testing purpose
-if __name__ == '__main__':
-    os.chdir('../')
-    print(usercheck.run())
-    print(usercheck.configure())
-    print(usercheck.__doc__)
