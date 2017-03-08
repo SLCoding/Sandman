@@ -40,7 +40,7 @@ If you've got some good ideas to improve this project [let us know](https://gith
 And if you like this project, spread the word.
 
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/SLCoding/server-sleep.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
-
+[![GitHub forks](https://img.shields.io/github/forks/badges/shields.svg?style=social&label=Fork)]()
 
 ## License
 
