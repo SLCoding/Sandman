@@ -12,24 +12,24 @@ class UsercheckPlugin(AbstractCheckPlugin):
 check for users which are logged in
     """
 
-    def __init__(self, configuration, user_info_util=None):
+    def __init__(self, configuration):
         self.logger = logging.getLogger(__name__)
         self.configuration = configuration
-        self.user_info_util = psutil
+
         self.max_usr = self.configuration["max_usr"]
         self.max_usr_local = self.configuration["max_usr_local"]
         self.max_usr_remote = self.configuration["max_usr_remote"]
         self.idle_timeout = self.configuration["idle_timeout"]
 
+        self.user_information_util = UserInformationUtil()
 
     def __del__(self):
         pass
 
     def check(self):
-        sessions = self._get_active_sessions()
-        session_count = self._get_session_count(sessions)
-        local_session_count = self._get_local_session_count(sessions)
-        remote_session_count = self._get_remote_session_count(sessions)
+        session_count = self.user_information_util.get_session_count(self.idle_timeout)
+        local_session_count = self.user_information_util.get_local_session_count(self.idle_timeout)
+        remote_session_count = self.user_information_util.get_remote_session_count(self.idle_timeout)
 
         if session_count > self.max_usr:
             return CheckReturn.DONT_SLEEP
@@ -70,22 +70,25 @@ check for users which are logged in
                 )
         ]
 
-    def _get_active_sessions(self):
-        return psutil.users()
 
-    def _get_session_count(self, sessions):
+class UserInformationUtil:
+    def __init__(self):
+        self.psutil = psutil
+
+    def get_session_count(self, idle_timeout):
+        sessions = self.psutil.users()
         active_session_count = 0
         for session in sessions:
             idle_time = self._get_session_idle_time(session)
-            if(idle_time <= self.idle_timeout):
+            if(idle_time <= idle_timeout):
                 active_session_count += 1
 
         return active_session_count
 
-    def _get_local_session_count(self, sessions):
+    def get_local_session_count(self, idle_timeout):
         pass
 
-    def _get_remote_session_count(self, sessions):
+    def get_remote_session_count(self, idle_timeout):
         pass
 
     def _get_session_idle_time(self, session):
