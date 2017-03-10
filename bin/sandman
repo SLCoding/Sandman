@@ -22,7 +22,7 @@ class Usage(Exception):
 
 def main(argv=None):
     """
-    usage: server-sleep [-h] [--help]
+    usage: sandman [-h] [--help]
                         [-u] [--usage]
                         [-s] [--start]
                         [-c] [--configure]
@@ -55,9 +55,9 @@ def main(argv=None):
 
             elif option in ("-s", "--start"):
                 instance = serverSleep()
-                logger.info("server-sleep started")
+                logger.info("sandman started")
                 instance.startup()
-                logger.info("server-sleep terminated")
+                logger.info("sandman terminated")
                 break
 
             elif option in ("-c", "--configure"):
