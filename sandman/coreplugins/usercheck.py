@@ -5,7 +5,7 @@ import sys, os, re
 import subprocess
 import configparser
 import logging
-from serversleep.api import PluginInterface
+from sandman.api import PluginInterface
 
 class usercheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -15,7 +15,7 @@ check for users which are logged in
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('../serversleep/checkmodules/usercheck.cfg')
+        config.read('../sandman/checkmodules/usercheck.cfg')
         self.max_usr = int(config.get('usercheck', 'max_usr'))
         self.max_usr_local = int(config.get('usercheck', 'max_usr_local'))
         self.max_usr_remote = int(config.get('usercheck', 'max_usr_remote'))

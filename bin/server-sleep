@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Get more information at: https://github.com/SLCoding/server-sleep
+Get more information at: https://github.com/SLCoding/sandman
 
 @author: wiesendaniel (Daniel Wiesendorf)
 @author: Japortie (Marcus Sch�tte)
@@ -12,7 +12,7 @@ import os, sys
 import getopt
 
 import logging
-from serversleep.serverSleep import serverSleep
+from sandman import Sandman
 
 
 class Usage(Exception):

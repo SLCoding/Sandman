@@ -5,7 +5,7 @@ import sys
 import configparser
 import subprocess
 import logging
-from serversleep.api import PluginInterface
+from sandman.api import PluginInterface
 
 class pyloadcheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -15,7 +15,7 @@ check if pyLoad is currently downloading
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('../serversleep/checkmodules/pyloadcheck.cfg')
+        config.read('../sandman/checkmodules/pyloadcheck.cfg')
         self.path = str(config.get('pyloadcheck', 'path'))
         self.logger = logging.getLogger(__name__)
 

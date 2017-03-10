@@ -6,7 +6,7 @@ import configparser
 import subprocess
 
 import logging
-from serversleep.api import PluginInterface
+from sandman.api import PluginInterface
 
 
 class pingcheck(PluginInterface.AbstractCheckPlugin):
@@ -17,7 +17,7 @@ check for computers in your network which are running
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('../serversleep/checkmodules/pingcheck.cfg')
+        config.read('../sandman/checkmodules/pingcheck.cfg')
         self.hostlist = eval(config.get('pingcheck', 'hostlist'), {}, {})
         self.max_hosts = int(config.get('pingcheck', 'max_hosts'))
         self.logger = logging.getLogger(__name__)
