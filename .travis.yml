@@ -15,7 +15,7 @@ python:
 addons:
   sonarqube:
     branches:
-      - develop
+      - master
 
 install:
   - pip install .
