@@ -14,7 +14,7 @@ This (hopefully) results in lower energy costs and extended hardware life.
 [![GitHub forks](https://img.shields.io/github/forks/SLCoding/Sandman.svg)](https://github.com/SLCoding/Sandman/network)
 [![GitHub stars](https://img.shields.io/github/stars/SLCoding/Sandman.svg)](https://github.com/SLCoding/Sandman/stargazers)
 
-[![Build Status](https://travis-ci.org/SLCoding/Sandman.svg)](https://travis-ci.org/SLCoding/Sandman)
+[![Travis branch](https://img.shields.io/travis/SLCoding/Sandman.svg)](https://travis-ci.org/SLCoding/Sandman)
 
 [![Code Climate](https://codeclimate.com/github/SLCoding/Sandman/badges/gpa.svg)](https://codeclimate.com/github/SLCoding/Sandman)
 [![Issue Count](https://codeclimate.com/github/SLCoding/Sandman/badges/issue_count.svg)](https://codeclimate.com/github/SLCoding/Sandman)
