@@ -18,7 +18,7 @@ addons:
       - master
 
 env:
-  - SONARQUBE_SCANNER_PARAMS="{"organization":"sl"}"
+  - SONARQUBE_SCANNER_PARAMS='{"organization":"sl"}'
 
 install:
   - pip install .
