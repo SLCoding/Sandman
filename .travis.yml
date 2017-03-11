@@ -17,6 +17,9 @@ addons:
     branches:
       - master
 
+env:
+  - SONARQUBE_SCANNER_PARAMS="{"organization":"sl"}"
+
 install:
   - pip install .
   - pip install codecov
