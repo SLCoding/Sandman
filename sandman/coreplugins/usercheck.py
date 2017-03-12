@@ -1,143 +1,100 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, os, re
-import subprocess
-import configparser
 import logging
-from sandman.api import PluginInterface
+import psutil
+from sandman.api.PluginInterface import AbstractCheckPlugin, CheckReturn, Configurable
 
-class usercheck(PluginInterface.AbstractCheckPlugin):
+
+class UsercheckPlugin(AbstractCheckPlugin):
     """
 check for users which are logged in
     """
 
-    def __init__(self):
-        # Read Configfile
-        config = configparser.ConfigParser()
-        config.read('../sandman/checkmodules/usercheck.cfg')
-        self.max_usr = int(config.get('usercheck', 'max_usr'))
-        self.max_usr_local = int(config.get('usercheck', 'max_usr_local'))
-        self.max_usr_remote = int(config.get('usercheck', 'max_usr_remote'))
-        self.idle_timeout = int(config.get('usercheck', 'idle_timeout'))
+    def __init__(self, configuration):
         self.logger = logging.getLogger(__name__)
+        self.configuration = configuration
+
+        self.max_usr = self.configuration["max_usr"]
+        self.max_usr_local = self.configuration["max_usr_local"]
+        self.max_usr_remote = self.configuration["max_usr_remote"]
+        self.idle_timeout = self.configuration["idle_timeout"]
+
+        self._user_information_util = UserInformationUtil()
 
     def __del__(self):
         pass
 
     def check(self):
-        try:
-            cmd = "w -hs"
+        session_count = self._user_information_util.get_session_count(self.idle_timeout)
+        local_session_count = self._user_information_util.get_local_session_count(self.idle_timeout)
+        remote_session_count = self._user_information_util.get_remote_session_count(self.idle_timeout)
 
-            ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+        if session_count > self.max_usr:
+            self.logger.info("Too many user sessions. Prevent sleep")
+            return CheckReturn.DONT_SLEEP
+        if local_session_count > self.max_usr_local:
+            self.logger.info("Too many local user sessions. Prevent sleep")
+            return CheckReturn.DONT_SLEEP
+        if remote_session_count > self.max_usr_remote:
+            self.logger.info("Too many remote user sessions. Prevent sleep")
+            return CheckReturn.DONT_SLEEP
 
-            output = ps.stdout.read()
-            ps.stdout.close()
-            ps.wait()
-
-            user = 0
-            local_user = 0
-            remote_user = 0
-
-            i = 0
-            for line in output.split("\n"):
-
-                if (line != "" and line != None):
-                    self.logger.info("Proccessing User " + str(i))
-                    fields = line.split()
-
-                    if (len(fields) < 5):
-                        idle = fields[2]
-                        location = ":--"
-                    else:
-                        idle = fields[3]
-                        location = fields[2]
-
-                    idle_time = 0
-                    hours = 0
-                    minutes = 0
-                    seconds = 0
-
-                    if (re.match("^[0-9]+\:[0-9]+m$", idle)):
-                        # hours:minutes
-                        idle = idle.split(":")
-                        hours = int(idle[0])
-                        minutes = int(idle[1].replace("m", ""))
-
-                    elif (re.match("^[0-9]+\.[0-9]+s$", idle)):
-                        # second.microsecond
-                        idle = idle.split(".")
-                        seconds = int(idle[0])
-
-                    elif (re.match("^[0-9]+\:[0-9]+$", idle)):
-                        # minutes:seconds
-                        idle = idle.split(":")
-                        minutes = int(idle[0])
-                        seconds = int(idle[1])
-                    else:
-                        self.logger.warning("User " + str(i) + " Idle time couldn't be parsed!")
-
-                    idle_time = (hours * 60 + minutes) * 60 + seconds
-                    self.logger.info("User " + str(i) + " Idle Time = " + str(idle_time) + " secs")
-                    local = False
-
-                    if (re.match("^\:.*$", location)):
-                        local = True
-
-                    if (idle_time < self.idle_timeout or self.idle_timeout < 0):
-                        user += 1
-                        if (local):
-                            self.logger.info("User " + str(i) + " Location: Local")
-                            local_user += 1
-                        else:
-                            self.logger.info("User " + str(i) + " Location: Remote")
-                            remote_user += 1
-                    i += 1
-
-            self.logger.info("Users: " + str(i))
-            self.logger.info("Active: " + str(user))
-            self.logger.info("Inactive: " + str(i - user))
-            self.logger.info("Local: " + str(local_user))
-            self.logger.info("Remote: " + str(remote_user))
-
-            if ((self.max_usr < user and self.max_usr >= 0) or (
-                            self.max_usr_local < local_user and self.max_usr_local >= 0) or (
-                            self.max_usr_remote < remote_user and self.max_usr_remote >= 0)):
-                self.logger.info("User: Not Ready for sleep! More users active than allowed!")
-                return 1
-
-            self.logger.info("User: Ready for sleep!")
-            return 0
-        except:
-            return -1
+        self.logger.info("Ready for sleep")
+        return CheckReturn.SLEEP_READY
 
     @staticmethod
-    def run():
-        instance = usercheck()
-        instance.logger.info("Usercheck: check started")
-        return instance.check()
+    def configurables():
+        return [
+                Configurable(
+                        "max_usr",
+                        "Maximum logged in users",
+                        "5",
+                        "Specify the maximum number of users that should be ignored when putting the Server to sleep."
+                        + " -1 disables check"
+                ),
+                Configurable(
+                        "max_usr_local",
+                        "Maximum locally logged in users",
+                        "2",
+                        "Specify the maximum number of local users that should be"
+                        + " ignored when putting the Server to sleep. -1 disables check"
+                ),
+                Configurable(
+                        "max_usr_remote",
+                        "Maximum remote logged in users ",
+                        "1",
+                        "Specify the maximum number of remote users that should be"
+                        + " ignored when putting the Server to sleep. -1 disables check"
+                ),
+                Configurable(
+                        "idle_timeout",
+                        "User Idle timeout",
+                        "3600",
+                        "Specify the idle timeout for user sessions. -1 disables timeout"
+                )
+        ]
 
-    def configurables(self):
-        configurable = []
-        configurable.append(
-            ["usercheck", "max_usr", '0', "amount of users logged in. nevertheless it's going to sleep | -1 = disable"])
-        configurable.append(["usercheck", "max_usr_local", '-1',
-                             "amount of users logged in local. nevertheless it's going to sleep | -1 = disable"])
-        configurable.append(["usercheck", "max_usr_remote", '-1',
-                             "amount of users logged in remotely. nevertheless it's going to sleep | -1 = disable"])
-        configurable.append(["usercheck", "idle_timeout", '1800',
-                             "time in sec. user which idle above this time are not counted | -1 = no timeout all user are counted"])
-        return configurable
 
-    def sleep(self):
-        self.logger.log("Usercheck Sleep Hook")
+class UserInformationUtil:
+    def __init__(self):
+        self.psutil = psutil
 
-    def wake(self):
-        self.logger.log("Usercheck Wake Hook")
+    def get_session_count(self, idle_timeout):
+        sessions = self.psutil.users()
+        active_session_count = 0
+        for session in sessions:
+            idle_time = self._get_session_idle_time(session)
+            if(idle_time <= idle_timeout):
+                active_session_count += 1
 
-# for testing purpose
-if __name__ == '__main__':
-    os.chdir('../')
-    print(usercheck.run())
-    print(usercheck.configure())
-    print(usercheck.__doc__)
+        return active_session_count
+
+    def get_local_session_count(self, idle_timeout):
+        pass
+
+    def get_remote_session_count(self, idle_timeout):
+        pass
+
+    def _get_session_idle_time(self, session):
+        pass
