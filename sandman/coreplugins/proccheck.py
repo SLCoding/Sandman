@@ -4,7 +4,7 @@
 import sys, os, signal, subprocess, re
 import configparser
 import logging
-from serversleep.api import PluginInterface
+from sandman.api import PluginInterface
 
 class proccheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -14,7 +14,7 @@ Write what your check do here!
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('../serversleep/checkmodules/proccheck.cfg')
+        config.read('../sandman/checkmodules/proccheck.cfg')
 
         # add your options here like this:
         self.procs = eval(config.get('proccheck', 'procs'), {}, {})

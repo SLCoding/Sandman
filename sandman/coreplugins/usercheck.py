@@ -3,7 +3,7 @@
 
 import logging
 import psutil
-from serversleep.api.PluginInterface import AbstractCheckPlugin, CheckReturn, Configurable
+from sandman.api.PluginInterface import AbstractCheckPlugin, CheckReturn, Configurable
 
 
 class UsercheckPlugin(AbstractCheckPlugin):

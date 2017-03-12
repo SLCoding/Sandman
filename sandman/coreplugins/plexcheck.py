@@ -4,7 +4,7 @@
 import sys, os, signal, subprocess, re, datetime
 import configparser
 import logging
-from serversleep.api import PluginInterface
+from sandman.api import PluginInterface
 
 class plexcheck(PluginInterface.AbstractCheckPlugin):
     """
@@ -14,7 +14,7 @@ Check if Plex had any connections or streams in a configurable time
     def __init__(self):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('../serversleep/checkmodules/plexcheck.cfg')
+        config.read('../sandman/checkmodules/plexcheck.cfg')
 
         # add your options here like this:
         self.conf_idletime = int(config.get('plexcheck', 'idletime'))

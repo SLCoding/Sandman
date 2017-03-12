@@ -15,7 +15,7 @@ python:
 addons:
   sonarqube:
     branches:
-      - develop
+      - master
 
 install:
   - pip install .
@@ -24,7 +24,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - coverage run --source=serversleep setup.py test
+  - coverage run --source=sandman setup.py test
   - sonar-scanner
 
 after_success:
