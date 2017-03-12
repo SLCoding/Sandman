@@ -15,7 +15,8 @@ setup(name='sandman',
         'bin/sandman'],
     install_requires=[
         'configparser',
-        'localconfig'
+        'localconfig',
+        'dbus-python'
     ],
     setup_requires=[
         'pytest-runner'],
