@@ -10,13 +10,13 @@ from sandman.api import PluginInterface
 
 class Sandman(object):
 
-    def __init__(self):
+    def __init__(self, config_file='server-sleep.cfg'):
         # Read Configfile
         config = configparser.ConfigParser()
-        config.read('server-sleep.cfg')
-        self.checkinterval = int(config.get('serverSleep', 'checkinterval'))
-        self.sleepcmd = config.get('serverSleep', 'sleepcmd')
-        self.enabledmodules = eval(config.get('serverSleep', 'enabledmodules'))
+        config.read(config_file)
+        self.checkinterval = int(config.get('sandman', 'checkinterval'))
+        self.sleepcmd = config.get('sandman', 'sleepcmd')
+        self.enabledmodules = eval(config.get('sandman', 'enabledmodules'))
         self.plugins = []
         self.logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ class Sandman(object):
     def __del__(self):
         pass
 
-    def startup(self):
+    def run(self):
         while True:
             self.logger.info("Wait " + str(self.checkinterval) + " seconds...")
             time.sleep(self.checkinterval)

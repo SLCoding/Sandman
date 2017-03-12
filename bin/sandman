@@ -1,81 +1,93 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Get more information at: https://github.com/SLCoding/sandman
-
-@author: wiesendaniel (Daniel Wiesendorf)
-@author: Japortie (Marcus Sch�tte)
-@version: v0.3
+sandman (https://github.com/SLCoding/Sandman)
 """
 
-import os, sys
-import getopt
-
+import sys
 import logging
+import argparse
 from sandman.Sandman import Sandman
 
 
-class Usage(Exception):
-    def __init__(self, msg):
-        self.msg = msg
+def get_parser():
+    parser = argparse.ArgumentParser(
+        description='Sandman puts your server to sleep when it\'s not in use.')
+
+    parser.add_argument(
+        '-d', '--daemon',
+        action='store_true',
+        help='start as daemon')
+
+    parser.add_argument(
+        '-c', '--config',
+        default='/etc/sandman/sandman.cfg',
+        help='path to config file')
+
+    parser.add_argument(
+        '-l', '--logfile',
+        default=None,
+        help='path to log file (logs to STDOUT if not set)')
+
+    parser.add_argument(
+        '-v', '--verbose',
+        action='count',
+        help='log level (-vvv for maximal verbosity)')
+
+    # TODO replace version while releasing
+    parser.add_argument(
+        '--version',
+        action='version',
+        version='%(prog)s X.X.X')
+
+    return parser
 
 
-def main(argv=None):
-    """
-    usage: sandman [-h] [--help]
-                        [-u] [--usage]
-                        [-s] [--start]
-                        [-c] [--configure]
-                        [-l] [--log]
-    """
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(levelname)-8s %(message)s',
-                        datefmt='%a, %d %b %Y %H:%M:%S')
+def get_logger(filename=None, lvl=None):
+
+    if lvl is None:
+        lvl = logging.DEBUG
+
+    if lvl == 1:
+        lvl = logging.WARNING
+
+    if lvl == 2:
+        lvl = logging.INFO
+
+    if lvl == 3:
+        lvl = logging.DEBUG
+
+    print(lvl)
+
+    logging.basicConfig(
+        filename=filename,
+        level=lvl,
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt='%a, %d %b %Y %H:%M:%S')
+
     logger = logging.getLogger(__name__)
 
-    # TODO refactor this check. If granted a user which has not uid 0 can suspend/hibernate a system. should not be handled global. catch as exception in suspend/hibernate execution
-    if not os.geteuid() == 0:
-        sys.exit("Only root can run this script")
+    return logger
 
-    if argv is None:
-        argv = sys.argv
-    try:
-        try:
-            opts, args = getopt.getopt(argv[1:], "huscl", ["help", "usage", "start", "configure", "log"])
-        except getopt.error as msg:
-            raise Usage(msg)
 
-        # option processing; breaks are written because only the first option is important
-        for option, value in opts:
-            if option in ("-h", "--help"):
-                print(__doc__)
-                break
+def run():
+    config = get_parser().parse_args()
 
-            elif option in ("-u", "--usage"):
-                print(self.__doc__)
-                break
+    print(config)
 
-            elif option in ("-s", "--start"):
-                instance = Sandman()
-                logger.info("sandman started")
-                instance.startup()
-                logger.info("sandman terminated")
-                break
+    # TODO implement daemon mode
 
-            elif option in ("-c", "--configure"):
-                print("configure")
-                break
-            elif option in ("-l", "--log"):
-                print("show logfile...")
-                break
+    logger = get_logger(filename=config.logfile, lvl=config.verbose)
+    logger.info("Starting...")
 
-        return 0
+    # TODO consider passing config object from here to get general config like log level here also
+    instance = Sandman(config_file=config.config)
+    instance.run()
 
-    except Usage as err:
-        print(str(err.msg))
-        print("for help use --help or --usage")
-        return 2
+    logger.info("Bye, bye")
+
+    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run())
