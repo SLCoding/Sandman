@@ -17,7 +17,7 @@ setup(name='sandman',
         'configparser',
         'localconfig',
         'psutil',
-        'enum34'
+        'enum34',
         'pydbus'
     ],
     setup_requires=[
