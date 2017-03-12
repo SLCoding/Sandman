@@ -15,7 +15,9 @@ setup(name='sandman',
         'bin/sandman'],
     install_requires=[
         'configparser',
-        'localconfig'
+        'localconfig',
+        'psutil',
+        'enum34'
     ],
     setup_requires=[
         'pytest-runner'],
