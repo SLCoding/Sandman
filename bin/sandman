@@ -32,6 +32,8 @@ def main(argv=None):
                         format='%(asctime)s %(levelname)-8s %(message)s',
                         datefmt='%a, %d %b %Y %H:%M:%S')
     logger = logging.getLogger(__name__)
+
+    # TODO refactor this check. If granted a user which has not uid 0 can suspend/hibernate a system. should not be handled global. catch as exception in suspend/hibernate execution
     if not os.geteuid() == 0:
         sys.exit("Only root can run this script")
 
