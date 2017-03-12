@@ -46,7 +46,7 @@ def get_parser():
 def get_logger(filename=None, lvl=None):
 
     if lvl is None:
-        lvl = logging.DEBUG
+        lvl = logging.ERROR
 
     if lvl == 1:
         lvl = logging.WARNING
