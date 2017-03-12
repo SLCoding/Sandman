@@ -3,7 +3,7 @@ from sandman.coreplugins.usercheck import UsercheckPlugin
 from sandman.coreplugins.usercheck import UserInformationUtil
 from sandman.api.PluginInterface import CheckReturn
 import unittest
-from unittest.mock import MagicMock
+from mock import MagicMock
 
 
 class UserPluginTest(unittest.TestCase):
