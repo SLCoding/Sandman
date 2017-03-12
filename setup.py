@@ -18,6 +18,7 @@ setup(name='sandman',
         'localconfig',
         'psutil',
         'enum34'
+        'pydbus'
     ],
     setup_requires=[
         'pytest-runner'],

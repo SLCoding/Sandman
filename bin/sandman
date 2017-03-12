@@ -12,7 +12,7 @@ import os, sys
 import getopt
 
 import logging
-from sandman import Sandman
+from sandman.Sandman import Sandman
 
 
 class Usage(Exception):

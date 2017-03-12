@@ -28,10 +28,23 @@ This (hopefully) results in lower energy costs and extended hardware life.
 ## Description
 
 There are a bunch of pre made Plugins you can use to check different conditions
+
 - Are local or ssh users logged in?
 - Are computers in the network up?
 - Are processes running which shouldn't be interrupted?
 - ... or whatever you want Sandman to check. Check out our [PluginInterface](sandman/api/).
+
+## Install
+```bash
+pip install sandman
+```
+
+### Mac dependencies
+```bash
+brew install dbus pygobject3
+ln -sfv /usr/local/opt/dbus/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
+```
 
 
 ## Wanna help?
@@ -41,6 +54,8 @@ And if you like this project, spread the word.
 
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/SLCoding/Sandman.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 [![GitHub forks](https://img.shields.io/github/forks/badges/shields.svg?style=social&label=Fork)]()
+
+
 
 
 ## License
