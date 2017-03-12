@@ -56,7 +56,7 @@ def main(argv=None):
                 break
 
             elif option in ("-s", "--start"):
-                instance = serverSleep()
+                instance = Sandman()
                 logger.info("sandman started")
                 instance.startup()
                 logger.info("sandman terminated")
