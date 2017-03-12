@@ -73,8 +73,6 @@ def get_logger(filename=None, lvl=None):
 def run():
     config = get_parser().parse_args()
 
-    print(config)
-
     # TODO implement daemon mode
 
     logger = get_logger(filename=config.logfile, lvl=config.verbose)
