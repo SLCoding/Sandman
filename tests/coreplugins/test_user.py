@@ -1,7 +1,7 @@
 # source: http://doc.pytest.org/en/latest/
-from serversleep.coreplugins.usercheck import UsercheckPlugin
-from serversleep.coreplugins.usercheck import UserInformationUtil
-from serversleep.api.PluginInterface import CheckReturn
+from sandman.coreplugins.usercheck import UsercheckPlugin
+from sandman.coreplugins.usercheck import UserInformationUtil
+from sandman.api.PluginInterface import CheckReturn
 import unittest
 from unittest.mock import MagicMock
 
