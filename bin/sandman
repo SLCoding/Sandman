@@ -57,8 +57,6 @@ def get_logger(filename=None, lvl=None):
     if lvl == 3:
         lvl = logging.DEBUG
 
-    print(lvl)
-
     logging.basicConfig(
         filename=filename,
         level=lvl,
