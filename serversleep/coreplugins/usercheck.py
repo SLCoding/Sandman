@@ -28,17 +28,15 @@ check for users which are logged in
         pass
 
     def check(self):
-        session_count = self._user_information_util.get_session_count(self.idle_timeout)
-        local_session_count = self._user_information_util.get_local_session_count(self.idle_timeout)
-        remote_session_count = self._user_information_util.get_remote_session_count(self.idle_timeout)
+        session_counts = self._user_information_util.get_session_counts(self.idle_timeout)
 
-        if session_count > self.max_usr:
+        if session_counts["all"] > self.max_usr:
             self.logger.info("Too many user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
-        if local_session_count > self.max_usr_local:
+        if session_counts["local"] > self.max_usr_local:
             self.logger.info("Too many local user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
-        if remote_session_count > self.max_usr_remote:
+        if session_counts["remote"] > self.max_usr_remote:
             self.logger.info("Too many remote user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
 
@@ -81,29 +79,34 @@ check for users which are logged in
 class UserInformationUtil:
     def __init__(self):
         self.psutil = psutil
-        self.terminal_util = TerminalInformationUtil()
 
-    def get_session_count(self, idle_timeout):
+    def get_session_counts(self, idle_timeout):
         sessions = self.psutil.users()
-        active_session_count = 0
+        active_session_counts = {
+            "all": 0,
+            "local": 0,
+            "remote": 0
+        }
+
         for session in sessions:
-            idle_time = self.terminal_util.get_idle_time(session.terminal)
-            if(idle_time <= idle_timeout):
-                active_session_count += 1
+            idle_time = self.get_idle_time(session.terminal)
+            if idle_time <= idle_timeout:
+                active_session_counts["all"] += 1
+                if self._is_session_remote(session):
+                    active_session_counts["remote"] += 1
+                else:
+                    active_session_counts["local"] += 1
 
-        return active_session_count
+        return active_session_counts
 
-    def get_local_session_count(self, idle_timeout):
-        pass
+    @staticmethod
+    def _is_session_remote(session):
+        if session.host != "localhost" and session.host != "127.0.0.1" and session.host != "":
+            return True
+        else:
+            return False
 
-    def get_remote_session_count(self, idle_timeout):
-        pass
-
-
-class TerminalInformationUtil:
-    def __init__(self):
-        pass
-
+    @staticmethod
     def get_idle_time(self, terminal):
         if not os.path.isabs(terminal):
             terminal = "/dev" + terminal
