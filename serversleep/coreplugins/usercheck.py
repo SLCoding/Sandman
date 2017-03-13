@@ -30,13 +30,13 @@ check for users which are logged in
     def check(self):
         session_counts = self._user_information_util.get_session_counts(self.idle_timeout)
 
-        if session_counts["all"] > self.max_usr:
+        if self.max_usr >= 0 and session_counts["all"] > self.max_usr:
             self.logger.info("Too many user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
-        if session_counts["local"] > self.max_usr_local:
+        if self.max_usr_local >= 0 and session_counts["local"] > self.max_usr_local:
             self.logger.info("Too many local user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
-        if session_counts["remote"] > self.max_usr_remote:
+        if self.max_usr_remote >= 0 and session_counts["remote"] > self.max_usr_remote:
             self.logger.info("Too many remote user sessions. Prevent sleep")
             return CheckReturn.DONT_SLEEP
 
