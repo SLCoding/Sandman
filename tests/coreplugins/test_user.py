@@ -77,3 +77,22 @@ class UserPluginTest(unittest.TestCase):
         user_check_plugin._user_information_util = mocked_user_util
 
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
+
+    def test_negative_disbales_max(self):
+        config = {
+            "max_usr": 8,
+            "max_usr_local": -1,
+            "max_usr_remote": 2,
+            "idle_timeout": 3600
+        }
+        user_check_plugin = UsercheckPlugin(config)
+        mocked_user_util = UserInformationUtil()
+        return_dict = {
+            "all": 7,
+            "local": 7,
+            "remote": 0
+        }
+        mocked_user_util.get_session_counts = MagicMock(return_value=return_dict)
+        user_check_plugin._user_information_util = mocked_user_util
+
+        self.assertEquals(user_check_plugin.check(), CheckReturn.SLEEP_READY)
