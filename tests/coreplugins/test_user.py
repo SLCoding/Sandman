@@ -8,17 +8,15 @@ from unittest.mock import MagicMock
 
 class UserPluginTest(unittest.TestCase):
 
-    @staticmethod
-    def get_configuration():
-        return {
-            "max_usr": 3,
-            "max_usr_local": 2,
-            "max_usr_remote": 2,
-            "idle_timeout": 3600
-        }
+    user_plugin_config = {
+        "max_usr": 3,
+        "max_usr_local": 2,
+        "max_usr_remote": 2,
+        "idle_timeout": 3600
+    }
 
     def test_create_usercheckplugin(self):
-        user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
+        user_check_plugin = UsercheckPlugin(UserPluginTest.user_plugin_config)
         self.assertEquals(user_check_plugin.max_usr, 3)
         self.assertEquals(user_check_plugin.max_usr_local, 2)
         self.assertEquals(user_check_plugin.max_usr_remote, 2)
@@ -29,7 +27,7 @@ class UserPluginTest(unittest.TestCase):
         self.assertEquals(len(configurables), 4)
 
     def test_returns_sleep_ready(self):
-        user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
+        user_check_plugin = UsercheckPlugin(UserPluginTest.user_plugin_config)
         mocked_user_util = UserInformationUtil()
         return_dict = {
             "all": 2,
@@ -42,7 +40,7 @@ class UserPluginTest(unittest.TestCase):
         self.assertEquals(user_check_plugin.check(), CheckReturn.SLEEP_READY)
 
     def test_exceed_max_usr(self):
-        user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
+        user_check_plugin = UsercheckPlugin(UserPluginTest.user_plugin_config)
         mocked_user_util = UserInformationUtil()
         return_dict = {
             "all": 4,
@@ -55,7 +53,7 @@ class UserPluginTest(unittest.TestCase):
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
 
     def test_exceed_max_local(self):
-        user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
+        user_check_plugin = UsercheckPlugin(UserPluginTest.user_plugin_config)
         mocked_user_util = UserInformationUtil()
         return_dict = {
             "all": 3,
@@ -68,7 +66,7 @@ class UserPluginTest(unittest.TestCase):
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
 
     def test_exceed_max_remote(self):
-        user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
+        user_check_plugin = UsercheckPlugin(UserPluginTest.user_plugin_config)
         mocked_user_util = UserInformationUtil()
         return_dict = {
             "all": 3,
