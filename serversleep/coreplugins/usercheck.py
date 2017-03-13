@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import os
 import psutil
+import time
 from serversleep.api.PluginInterface import AbstractCheckPlugin, CheckReturn, Configurable
 
 
@@ -79,12 +81,13 @@ check for users which are logged in
 class UserInformationUtil:
     def __init__(self):
         self.psutil = psutil
+        self.terminal_util = TerminalInformationUtil()
 
     def get_session_count(self, idle_timeout):
         sessions = self.psutil.users()
         active_session_count = 0
         for session in sessions:
-            idle_time = self._get_session_idle_time(session)
+            idle_time = self.terminal_util.get_idle_time(session.terminal)
             if(idle_time <= idle_timeout):
                 active_session_count += 1
 
@@ -96,5 +99,14 @@ class UserInformationUtil:
     def get_remote_session_count(self, idle_timeout):
         pass
 
-    def _get_session_idle_time(self, session):
+
+class TerminalInformationUtil:
+    def __init__(self):
         pass
+
+    def get_idle_time(self, terminal):
+        if not os.path.isabs(terminal):
+            terminal = "/dev" + terminal
+        mod_time = os.path.getmtime(terminal)
+        now = time.time()
+        return now - mod_time
