@@ -29,6 +29,7 @@ check for users which are logged in
 
     def check(self):
         session_counts = self._user_information_util.get_session_counts(self.idle_timeout)
+        self.logger.info("Active Sessions: " + str(session_counts))
 
         if self.max_usr >= 0 and session_counts["all"] > self.max_usr:
             self.logger.info("Too many user sessions. Prevent sleep")
@@ -79,6 +80,7 @@ check for users which are logged in
 class UserInformationUtil:
     def __init__(self):
         self.psutil = psutil
+        self.logger = logging.getLogger(__name__)
 
     def get_session_counts(self, idle_timeout):
         sessions = self.psutil.users()
@@ -89,13 +91,20 @@ class UserInformationUtil:
         }
 
         for session in sessions:
+            self.logger.info("Check Session: " + str(session))
             idle_time = self.get_idle_time(session.terminal)
+            self.logger.info("Session idle time: " + str(idle_time))
             if idle_time <= idle_timeout:
+                self.logger.info("Session is active")
                 active_session_counts["all"] += 1
                 if self._is_session_remote(session):
+                    self.logger.info("Session is remote")
                     active_session_counts["remote"] += 1
                 else:
+                    self.logger.info("Session is local")
                     active_session_counts["local"] += 1
+            else:
+                self.logger.info("Session is inactive")
 
         return active_session_counts
 
