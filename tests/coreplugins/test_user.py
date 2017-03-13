@@ -31,9 +31,12 @@ class UserPluginTest(unittest.TestCase):
     def test_returns_sleep_ready(self):
         user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
         mocked_user_util = UserInformationUtil()
-        mocked_user_util.get_local_session_count = MagicMock(return_value=1)
-        mocked_user_util.get_remote_session_count = MagicMock(return_value=1)
-        mocked_user_util.get_session_count = MagicMock(return_value=2)
+        return_dict = {
+            "all": 2,
+            "local": 1,
+            "remote": 1
+        }
+        mocked_user_util.get_session_counts = MagicMock(return_value=return_dict)
         user_check_plugin._user_information_util = mocked_user_util
 
         self.assertEquals(user_check_plugin.check(), CheckReturn.SLEEP_READY)
@@ -41,9 +44,12 @@ class UserPluginTest(unittest.TestCase):
     def test_exceed_max_usr(self):
         user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
         mocked_user_util = UserInformationUtil()
-        mocked_user_util.get_local_session_count = MagicMock(return_value=2)
-        mocked_user_util.get_remote_session_count = MagicMock(return_value=2)
-        mocked_user_util.get_session_count = MagicMock(return_value=4)
+        return_dict = {
+            "all": 4,
+            "local": 2,
+            "remote": 2
+        }
+        mocked_user_util.get_session_counts = MagicMock(return_value=return_dict)
         user_check_plugin._user_information_util = mocked_user_util
 
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
@@ -51,9 +57,12 @@ class UserPluginTest(unittest.TestCase):
     def test_exceed_max_local(self):
         user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
         mocked_user_util = UserInformationUtil()
-        mocked_user_util.get_local_session_count = MagicMock(return_value=3)
-        mocked_user_util.get_remote_session_count = MagicMock(return_value=0)
-        mocked_user_util.get_session_count = MagicMock(return_value=3)
+        return_dict = {
+            "all": 3,
+            "local": 3,
+            "remote": 0
+        }
+        mocked_user_util.get_session_counts = MagicMock(return_value=return_dict)
         user_check_plugin._user_information_util = mocked_user_util
 
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
@@ -61,9 +70,12 @@ class UserPluginTest(unittest.TestCase):
     def test_exceed_max_remote(self):
         user_check_plugin = UsercheckPlugin(UserPluginTest.get_configuration())
         mocked_user_util = UserInformationUtil()
-        mocked_user_util.get_local_session_count = MagicMock(return_value=0)
-        mocked_user_util.get_remote_session_count = MagicMock(return_value=3)
-        mocked_user_util.get_session_count = MagicMock(return_value=0)
+        return_dict = {
+            "all": 3,
+            "local": 0,
+            "remote": 3
+        }
+        mocked_user_util.get_session_counts = MagicMock(return_value=return_dict)
         user_check_plugin._user_information_util = mocked_user_util
 
         self.assertEquals(user_check_plugin.check(), CheckReturn.DONT_SLEEP)
