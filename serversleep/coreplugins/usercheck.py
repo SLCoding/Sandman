@@ -107,7 +107,7 @@ class UserInformationUtil:
             return False
 
     @staticmethod
-    def get_idle_time(self, terminal):
+    def get_idle_time(terminal):
         if not os.path.isabs(terminal):
             terminal = "/dev" + terminal
         mod_time = os.path.getmtime(terminal)
