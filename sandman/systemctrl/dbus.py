@@ -1,6 +1,7 @@
 from pydbus import SessionBus
 
 # TODO I'm not happy with the naming of this module. -> Find a better name
+# TODO check for privileges to suspend
 
 bus = SessionBus()
 power = bus.get('org.freedesktop.UPower', '/org/freedesktop/UPower')
